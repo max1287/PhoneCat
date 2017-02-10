@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PhoneCat.DTO
 {
-    public class PhoneDetailsDTO
+    public class PhoneDetailDTO
     {
         public int Id { get; set; }
         [Required]

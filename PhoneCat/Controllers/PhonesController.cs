@@ -2,10 +2,13 @@
 using PhoneCat.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PhoneCat.Controllers
 {
@@ -13,7 +16,7 @@ namespace PhoneCat.Controllers
     {
         private PhoneCatContext db = new PhoneCatContext();
 
-        //GET api/phones
+        //GET: api/phones
         public IQueryable<PhoneDTO> GetPhones()
         {
             var phones = from p in db.Phones
@@ -25,6 +28,26 @@ namespace PhoneCat.Controllers
                              Snippet = p.Snippet
                          };
             return phones;
+        }
+
+        // GET: api/phones/5
+        [ResponseType(typeof(PhoneDetailDTO))]
+        public async Task<IHttpActionResult> GetPhones(int id)
+        {
+            var phone = await db.Phones.Select(p =>
+            new PhoneDetailDTO()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description
+            }).SingleOrDefaultAsync(p => p.Id == id);
+
+            if (phone == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(phone);
         }
 
         protected override void Dispose(bool disposing)
