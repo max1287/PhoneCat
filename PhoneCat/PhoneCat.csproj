@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201702100634582_Initial.Designer.cs">
       <DependentUpon>201702100634582_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702100657286_Name-Required.cs" />
+    <Compile Include="Migrations\201702100657286_Name-Required.Designer.cs">
+      <DependentUpon>201702100657286_Name-Required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,6 +239,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702100634582_Initial.resx">
       <DependentUpon>201702100634582_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702100657286_Name-Required.resx">
+      <DependentUpon>201702100657286_Name-Required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
