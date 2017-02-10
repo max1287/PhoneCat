@@ -1,0 +1,21 @@
+﻿<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <form>
+            <div class="col-lg-12">
+                <label for="$ctrl.editName">Name:</label>
+                <input class="form-control" ng-model="$ctrl.editName" />
+                <label for="$ctrl.editDescription">Description:</label>
+                <textarea class="form-control" rows="5" ng-model="$ctrl.editDescription"></textarea>
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+<ul class="phone-thumbs">
+    <li ng-repeat="img in $ctrl.phone.images">
+        <img ng-src="{{img}}" ng-click="$ctrl.setImage(img)" ng-dblclick="$ctrl.onDblclick(img)" />
+    </li>
+</ul>

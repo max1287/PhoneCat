@@ -28,7 +28,9 @@ namespace PhoneCat
                         "~/app/phone-list/phone-list.module.js",
                         "~/app/phone-list/phone-list.component.js",
                         "~/app/phone-detail/phone-detail.module.js",
-                        "~/app/phone-detail/phone-detail.component.js"
+                        "~/app/phone-detail/phone-detail.component.js",
+                        "~/app/phone-edit/phone-edit.module.js",
+                        "~/app/phone-edit/phone-edit.component.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

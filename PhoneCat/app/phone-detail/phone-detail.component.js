@@ -18,7 +18,7 @@ angular.
 
 
             	self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
-            		self.setImage(self.phone.images[0]);
+            		
             	});
             }
     	]
