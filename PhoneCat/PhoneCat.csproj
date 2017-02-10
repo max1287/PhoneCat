@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhonesController.cs" />
     <Compile Include="DAL\PhoneCatContext.cs" />
     <Compile Include="DTO\PhoneDetailsDTO.cs" />
     <Compile Include="DTO\PhoneDTO.cs" />
