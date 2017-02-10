@@ -12,6 +12,9 @@ angular.
                 },
                 'update': {
                     method: 'PUT'
+                },
+                'save': {
+                    method: 'POST'
                 }
             });
         }

@@ -17,7 +17,9 @@
     </div>
 </div>
 
-<button ng-click="$ctrl.saveChanges()" class="btn btn-danger">Save</button>
+<button ng-show="!$ctrl.createOrUpdate" ng-click="$ctrl.saveChanges()" class="btn btn-danger">Save</button>
+<button ng-show="$ctrl.createOrUpdate" ng-click="$ctrl.createChanges()" class="btn btn-danger">Create</button>
+<button ng-click="$ctrl.cancelChanges()" class="btn btn-danger">Cancel</button>
 
 <ul class="phone-thumbs">
     <li ng-repeat="img in $ctrl.phone.images">

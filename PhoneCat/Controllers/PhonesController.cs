@@ -89,6 +89,21 @@ namespace PhoneCat.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // POST: api/phones
+        [ResponseType(typeof(Phone))]
+        public async Task<IHttpActionResult> PostPhone(Phone phone)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Phones.Add(phone);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = phone.Id }, phone);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
