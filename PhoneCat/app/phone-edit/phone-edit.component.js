@@ -12,18 +12,15 @@ angular.
 
             	if ($routeParams.phoneId == null) {
             	    self.createOrUpdate = true;
-            	    self.setImage = function setImage(imageUrl) {
-            	        self.mainImageUrl = imageUrl;
-            	        self.createChanges = function createChanges() {
-            	            self.phone = new Phone;
-            	            self.phone.name = self.editName;
-            	            self.phone.description = self.editDescription;
-            	            self.phone.snippet = self.editSnippet;
-            	            self.phone.age = self.editAge;
-            	            Phone.save(self.phone, function () {
-            	                $location.path('/phones')
-            	            });
-            	        }
+            	    self.createChanges = function createChanges() {
+            	        self.phone = new Phone;
+            	        self.phone.name = self.editName;
+            	        self.phone.description = self.editDescription;
+            	        self.phone.snippet = self.editSnippet;
+            	        self.phone.age = self.editAge;
+            	        Phone.save(self.phone, function () {
+            	            $location.path('/phones')
+            	        });
             	    }
             	}
             	else {
