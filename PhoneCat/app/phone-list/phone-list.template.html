@@ -1,0 +1,42 @@
+﻿<div class="container-fluid">
+     <div class="row">
+         <div class="col-md-2">
+            <p>
+                Search: <input ng-model="$ctrl.query" />
+            </p>
+            <p>
+                Sort by:
+                <select ng-model="$ctrl.orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="age">Newest</option>
+                </select>
+            </p>
+             <p>
+                 <div>
+                     <input type="radio" ng-model="$ctrl.desc" value="" />DESC<br />
+                     <input type="radio" ng-model="$ctrl.desc" value="-" />ASC<br />
+                 </div>
+             </p>
+         </div>
+         <div class="col-md-10">
+             <br />
+             <p>Search line: <span ng-bind="$ctrl.query"></span></p>
+             <p>Ordered by: <span ng-bind="$ctrl.orderProp"></span></p>
+             <p>Desc by: <span ng-bind="$ctrl.desc"></span></p>
+             <h4>Total number of phones: {{($ctrl.phones| filter: $ctrl.query).length}}</h4>
+             
+             <ul class="phones">
+                 <li ng-repeat="phone in $ctrl.phones | filter: $ctrl.query | orderBy: ''+$ctrl.desc+$ctrl.orderProp" 
+                     class="thumbnail phone-list-item">
+                     <a href="#!/phones/{{phone.id}}" class="thumb">
+                         <img ng-src="{{phone.imageUrl}}" alt = "{{phone.name}}" />
+                     </a>
+                     <a href="#!/phones/{{phone.id}}">{{phone.name}}</a>
+                     <p>{{phone.snippet}}</p>
+                 </li>
+             </ul>
+
+         </div>
+     </div>
+</div>
+
