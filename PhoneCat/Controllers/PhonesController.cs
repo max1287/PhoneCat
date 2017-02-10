@@ -1,8 +1,10 @@
 ﻿using PhoneCat.DAL;
 using PhoneCat.DTO;
+using PhoneCat.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -39,7 +41,9 @@ namespace PhoneCat.Controllers
             {
                 Id = p.Id,
                 Name = p.Name,
-                Description = p.Description
+                Description = p.Description,
+                Snippet = p.Snippet,
+                Age = p.Age
             }).SingleOrDefaultAsync(p => p.Id == id);
 
             if (phone == null)
@@ -50,6 +54,41 @@ namespace PhoneCat.Controllers
             return Ok(phone);
         }
 
+        // PUT: api/phones/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutPhone(int id, Phone phone)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != phone.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(phone).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PhoneExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -57,6 +96,11 @@ namespace PhoneCat.Controllers
                 this.db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool PhoneExists(int id)
+        {
+            return db.Phones.Count(e => e.Id == id) > 0;
         }
     }
 }

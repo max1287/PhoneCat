@@ -5,10 +5,13 @@ angular.
     factory('Phone', ['$resource',
         function ($resource) {
             return $resource('api/phones/:phoneId', {}, {
-                query: {
+                'query': {
                     method: 'GET',
                     params: { phoneId: '' },
                     isArray: true
+                },
+                'update': {
+                    method: 'PUT'
                 }
             });
         }
