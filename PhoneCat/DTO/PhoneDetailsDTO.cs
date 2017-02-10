@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace PhoneCat.Models
+namespace PhoneCat.DTO
 {
-    public class Phone
+    public class PhoneDetailsDTO
     {
         public int Id { get; set; }
         [Required]
