@@ -14,5 +14,6 @@ namespace PhoneCat.DTO
         public string Description { get; set; }
         public int Age { get; set; }
         public string Snippet { get; set; }
+        public List<string> Images { get; set; }
     }
 }

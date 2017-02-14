@@ -27,7 +27,8 @@ namespace PhoneCat.Controllers
                              Id = p.Id,
                              Name = p.Name,
                              Age = p.Age,
-                             Snippet = p.Snippet
+                             Snippet = p.Snippet,
+                             ImageUrl = p.Images.FirstOrDefault().ImageUrl
                          };
             return phones;
         }
@@ -43,8 +44,11 @@ namespace PhoneCat.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 Snippet = p.Snippet,
-                Age = p.Age
+                Age = p.Age,
+                Images = p.Images.Select(g => g.ImageUrl).ToList()
             }).SingleOrDefaultAsync(p => p.Id == id);
+
+            
 
             if (phone == null)
             {

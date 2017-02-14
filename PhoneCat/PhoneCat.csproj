@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PhonesController.cs" />
     <Compile Include="DAL\PhoneCatContext.cs" />
     <Compile Include="DTO\PhoneDetailDTO.cs" />
@@ -178,7 +179,16 @@
     <Compile Include="Migrations\201702101406402_initial.Designer.cs">
       <DependentUpon>201702101406402_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702140744467_addImages.cs" />
+    <Compile Include="Migrations\201702140744467_addImages.Designer.cs">
+      <DependentUpon>201702140744467_addImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702140757594_addImages1.cs" />
+    <Compile Include="Migrations\201702140757594_addImages1.Designer.cs">
+      <DependentUpon>201702140757594_addImages1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,6 +206,85 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\img\dell-streak-7.0.jpg" />
+    <Content Include="Content\img\dell-streak-7.1.jpg" />
+    <Content Include="Content\img\dell-streak-7.2.jpg" />
+    <Content Include="Content\img\dell-streak-7.3.jpg" />
+    <Content Include="Content\img\dell-streak-7.4.jpg" />
+    <Content Include="Content\img\dell-venue.0.jpg" />
+    <Content Include="Content\img\dell-venue.1.jpg" />
+    <Content Include="Content\img\dell-venue.2.jpg" />
+    <Content Include="Content\img\dell-venue.3.jpg" />
+    <Content Include="Content\img\dell-venue.4.jpg" />
+    <Content Include="Content\img\dell-venue.5.jpg" />
+    <Content Include="Content\img\droid-2-global-by-motorola.0.jpg" />
+    <Content Include="Content\img\droid-2-global-by-motorola.1.jpg" />
+    <Content Include="Content\img\droid-2-global-by-motorola.2.jpg" />
+    <Content Include="Content\img\droid-pro-by-motorola.0.jpg" />
+    <Content Include="Content\img\droid-pro-by-motorola.1.jpg" />
+    <Content Include="Content\img\lg-axis.0.jpg" />
+    <Content Include="Content\img\lg-axis.1.jpg" />
+    <Content Include="Content\img\lg-axis.2.jpg" />
+    <Content Include="Content\img\motorola-atrix-4g.0.jpg" />
+    <Content Include="Content\img\motorola-atrix-4g.1.jpg" />
+    <Content Include="Content\img\motorola-atrix-4g.2.jpg" />
+    <Content Include="Content\img\motorola-atrix-4g.3.jpg" />
+    <Content Include="Content\img\motorola-bravo-with-motoblur.0.jpg" />
+    <Content Include="Content\img\motorola-bravo-with-motoblur.1.jpg" />
+    <Content Include="Content\img\motorola-bravo-with-motoblur.2.jpg" />
+    <Content Include="Content\img\motorola-charm-with-motoblur.0.jpg" />
+    <Content Include="Content\img\motorola-charm-with-motoblur.1.jpg" />
+    <Content Include="Content\img\motorola-charm-with-motoblur.2.jpg" />
+    <Content Include="Content\img\motorola-defy-with-motoblur.0.jpg" />
+    <Content Include="Content\img\motorola-defy-with-motoblur.1.jpg" />
+    <Content Include="Content\img\motorola-defy-with-motoblur.2.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.0.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.1.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.2.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.3.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.4.jpg" />
+    <Content Include="Content\img\motorola-xoom-with-wi-fi.5.jpg" />
+    <Content Include="Content\img\motorola-xoom.0.jpg" />
+    <Content Include="Content\img\motorola-xoom.1.jpg" />
+    <Content Include="Content\img\motorola-xoom.2.jpg" />
+    <Content Include="Content\img\nexus-s.0.jpg" />
+    <Content Include="Content\img\nexus-s.1.jpg" />
+    <Content Include="Content\img\nexus-s.2.jpg" />
+    <Content Include="Content\img\nexus-s.3.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.0.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.1.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.2.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.3.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.4.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.5.jpg" />
+    <Content Include="Content\img\samsung-galaxy-tab.6.jpg" />
+    <Content Include="Content\img\samsung-gem.0.jpg" />
+    <Content Include="Content\img\samsung-gem.1.jpg" />
+    <Content Include="Content\img\samsung-gem.2.jpg" />
+    <Content Include="Content\img\samsung-mesmerize-a-galaxy-s-phone.0.jpg" />
+    <Content Include="Content\img\samsung-mesmerize-a-galaxy-s-phone.1.jpg" />
+    <Content Include="Content\img\samsung-mesmerize-a-galaxy-s-phone.2.jpg" />
+    <Content Include="Content\img\samsung-mesmerize-a-galaxy-s-phone.3.jpg" />
+    <Content Include="Content\img\samsung-showcase-a-galaxy-s-phone.0.jpg" />
+    <Content Include="Content\img\samsung-showcase-a-galaxy-s-phone.1.jpg" />
+    <Content Include="Content\img\samsung-showcase-a-galaxy-s-phone.2.jpg" />
+    <Content Include="Content\img\samsung-transform.0.jpg" />
+    <Content Include="Content\img\samsung-transform.1.jpg" />
+    <Content Include="Content\img\samsung-transform.2.jpg" />
+    <Content Include="Content\img\samsung-transform.3.jpg" />
+    <Content Include="Content\img\samsung-transform.4.jpg" />
+    <Content Include="Content\img\sanyo-zio.0.jpg" />
+    <Content Include="Content\img\sanyo-zio.1.jpg" />
+    <Content Include="Content\img\sanyo-zio.2.jpg" />
+    <Content Include="Content\img\t-mobile-g2.0.jpg" />
+    <Content Include="Content\img\t-mobile-g2.1.jpg" />
+    <Content Include="Content\img\t-mobile-g2.2.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.0.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.1.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.2.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.3.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.4.jpg" />
+    <Content Include="Content\img\t-mobile-mytouch-4g.5.jpg" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
@@ -266,6 +355,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702101406402_initial.resx">
       <DependentUpon>201702101406402_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702140744467_addImages.resx">
+      <DependentUpon>201702140744467_addImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702140757594_addImages1.resx">
+      <DependentUpon>201702140757594_addImages1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
