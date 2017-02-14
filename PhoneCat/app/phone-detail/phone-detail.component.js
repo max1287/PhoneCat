@@ -6,10 +6,10 @@ angular.
     	templateUrl: "app/phone-detail/phone-detail.template.html",
     	controller: ['Phone', '$routeParams',
             function PhoneDetailController(Phone, $routeParams) {
-            	var self = this;
+                var self = this;
 
             	self.setImage = function setImage(imageUrl) {
-            		self.mainImageUrl = imageUrl;
+            	    self.mainImageUrl = "/api/image?imageUrl="+imageUrl;
             	}
 
             	self.onDblclick = function onDblclick(imageUrl) {
@@ -18,7 +18,7 @@ angular.
 
 
             	self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
-            		
+                    self.mainImageUrl = "/api/image?imageUrl=" + self.phone.images[0];
             	});
             }
     	]

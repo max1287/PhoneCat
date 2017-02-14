@@ -1,3 +1,6 @@
 ﻿'use strict';
 
-angular.module('core', ['core.phone']);
+angular.module('core', [
+    'core.phone',
+    'core.image'
+]);

@@ -193,6 +193,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\core\image\image.module.js" />
+    <Content Include="app\core\image\image.service.js" />
     <Content Include="app\phone-edit\phone-edit.component.js" />
     <Content Include="app\phone-edit\phone-edit.module.js" />
     <Content Include="app\phone-edit\phone-edit.template.html" />

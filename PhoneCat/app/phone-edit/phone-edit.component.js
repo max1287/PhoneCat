@@ -4,13 +4,13 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
     	templateUrl: "app/phone-edit/phone-edit.template.html",
-    	controller: ['$location', 'Phone', '$routeParams',
-            function PhoneEditController($location, Phone, $routeParams) {
+    	controller: ['$location', 'Phone', '$routeParams', 'Image',
+            function PhoneEditController($location, Phone, $routeParams, Image) {
                 var self = this;
 
                 self.createOrUpdate = false;
 
-            	if ($routeParams.phoneId == null) {
+            	if ($routeParams.phoneId == null) {//create
             	    self.createOrUpdate = true;
             	    self.createChanges = function createChanges() {
             	        self.phone = new Phone;
@@ -23,7 +23,7 @@ angular.
             	        });
             	    }
             	}
-            	else {
+            	else {//update
             	    self.saveChanges = function saveChanges() {
             	        self.phone.name = self.editName;
             	        self.phone.description = self.editDescription;
@@ -40,6 +40,10 @@ angular.
             	        self.editSnippet = self.phone.snippet;
             	        self.editAge = self.phone.age;
             	    });
+            	}
+
+            	self.updateSth = function updateSth() {
+            	    Image.save(fileToUpload);
             	}
 
             	self.cancelChanges = function cancelChanges() {

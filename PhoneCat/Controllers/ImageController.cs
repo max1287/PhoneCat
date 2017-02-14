@@ -8,8 +8,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace PhoneCat.Controllers
 {
@@ -23,19 +25,23 @@ namespace PhoneCat.Controllers
             {
                 var result = new HttpResponseMessage(HttpStatusCode.OK);
                 string filePath = HostingEnvironment.MapPath("~/Content/img/"+imageUrl);
-                using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                if (File.Exists(filePath))
                 {
-                    Image image = Image.FromStream(fileStream);
-                    using (MemoryStream memoryStream = new MemoryStream())
+                    using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        image.Save(memoryStream, ImageFormat.Jpeg);
-                        result.Content = new ByteArrayContent(memoryStream.ToArray());
-                        result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                        Image image = Image.FromStream(fileStream);
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            image.Save(memoryStream, ImageFormat.Jpeg);
+                            result.Content = new ByteArrayContent(memoryStream.ToArray());
+                            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                        }
                     }
+                    return result;
                 }
-                return result;
+                else return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
-            return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            else return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
     }
 }

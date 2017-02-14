@@ -23,6 +23,12 @@
 
 <ul class="phone-thumbs">
     <li ng-repeat="img in $ctrl.phone.images">
-        <img ng-src="{{img}}" ng-click="$ctrl.setImage(img)" ng-dblclick="$ctrl.onDblclick(img)" />
+        <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
     </li>
 </ul>
+
+
+<form ng-submit="updateSth()" name="uploadForm" enctype="multipart/form-data">
+    <input name="file" type="file" id="file" file-model="fileToUpload" />
+    <input name="somethingINeed" type="submit" value="Upload" />
+</form> 
