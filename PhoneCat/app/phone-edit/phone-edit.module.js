@@ -2,5 +2,7 @@
 
 angular.module('phoneEdit', [
     'ngRoute',
-    'core.phone'
+    'core.phone',
+    'core.image',
+    'ngFileUpload'
 ]);

@@ -6,5 +6,6 @@ angular.module('phonecatApp', [
     'phoneList',
     'phoneDetail',
     'phoneEdit',
-    'core'
+    'core',
+    'ngFileUpload'
 ]);

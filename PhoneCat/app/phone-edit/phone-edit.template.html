@@ -27,8 +27,10 @@
     </li>
 </ul>
 
+<button type="file" ngf-select="$ctrl.uploadPic($file)"
+     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+Select File
+</button>
 
-<form ng-submit="updateSth()" name="uploadForm" enctype="multipart/form-data">
-    <input name="file" type="file" id="file" file-model="fileToUpload" />
-    <input name="somethingINeed" type="submit" value="Upload" />
-</form> 
+
+<img ng-src="$ctrl.Image" />

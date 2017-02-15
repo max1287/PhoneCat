@@ -17,7 +17,8 @@ namespace PhoneCat
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                         "~/Scripts/angular.js",
                         "~/Scripts/angular-route.js",
-                        "~/Scripts/angular-resource.js"
+                        "~/Scripts/angular-resource.js",
+                        "~/Scripts/ng-file-upload.js"
                         ));
             bundles.Add(new ScriptBundle("~/bundles/appModules").Include(
                         "~/app/app.module.js",
