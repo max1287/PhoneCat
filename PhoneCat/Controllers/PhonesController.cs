@@ -60,17 +60,31 @@ namespace PhoneCat.Controllers
 
         // PUT: api/phones/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutPhone(int id, Phone phone)
+        public async Task<IHttpActionResult> PutPhone(int id, PhoneDetailDTO phoneDetailDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != phone.Id)
+            if (id != phoneDetailDTO.Id)
             {
                 return BadRequest();
             }
+
+            Phone phone = await db.Phones.SingleOrDefaultAsync(p => p.Id == id);
+            phone.Name = phoneDetailDTO.Name;
+            phone.Snippet = phoneDetailDTO.Snippet;
+            phone.Description = phoneDetailDTO.Description;
+            phone.Age = phoneDetailDTO.Age;
+            List<Image> imgList = phone.Images.ToList();
+            for(int i=0; i<phoneDetailDTO.Images.Count; i++)
+            {
+                String s = phoneDetailDTO.Images.ElementAt(i);
+                Image img = await db.Images.SingleOrDefaultAsync(pic => pic.ImageUrl == s);
+                if (imgList.Contains(img)==false) imgList.Add(img);
+            }
+            phone.Images = imgList;
 
             db.Entry(phone).State = EntityState.Modified;
 
@@ -95,17 +109,32 @@ namespace PhoneCat.Controllers
 
         // POST: api/phones
         [ResponseType(typeof(Phone))]
-        public async Task<IHttpActionResult> PostPhone(Phone phone)
+        public async Task<IHttpActionResult> PostPhone(PhoneDetailDTO phoneDetailDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            Phone phone = new Phone
+            {
+                Name = phoneDetailDTO.Name,
+                Snippet = phoneDetailDTO.Snippet,
+                Age = phoneDetailDTO.Age,
+                Description = phoneDetailDTO.Description
+            };
+            List<Image> imgList = new List<Image>();
+            for (int i = 0; i < phoneDetailDTO.Images.Count; i++)
+            {
+                String s = phoneDetailDTO.Images.ElementAt(i);
+                Image img = db.Images.SingleOrDefault(pic => pic.ImageUrl == s);
+                imgList.Add(img);
+            }
+            phone.Images = imgList;
             db.Phones.Add(phone);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = phone.Id }, phone);
+            //return CreatedAtRoute("DefaultApi", new { id = phone.Id }, phoneDetailDTO);
+            return ResponseMessage(new HttpResponseMessage(HttpStatusCode.OK));
         }
 
         protected override void Dispose(bool disposing)

@@ -21,16 +21,16 @@
 <button ng-show="$ctrl.createOrUpdate" ng-click="$ctrl.createChanges()" class="btn btn-danger">Create</button>
 <button ng-click="$ctrl.cancelChanges()" class="btn btn-danger">Cancel</button>
 
+<input type="text" ng-model="$ctrl.phone.name" />
+{{$ctrl.phone.name}}
+{{$ctrl.phone.images.count}}
 <ul class="phone-thumbs">
     <li ng-repeat="img in $ctrl.phone.images">
         <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
     </li>
 </ul>
 
-<button type="file" ngf-select="$ctrl.uploadPic($file)"
-     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+<button type="file" ngf-select="$ctrl.uploadPic($files)"
+     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ngf-multiple="true">
 Select File
 </button>
-
-
-<img ng-src="$ctrl.Image" />

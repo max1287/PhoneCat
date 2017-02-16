@@ -11,8 +11,9 @@ angular.
 
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
+                    self.phone = new Phone;
+                    self.phone.images = [];
                     self.createChanges = function createChanges() {
-                        self.phone = new Phone;
                         self.phone.name = self.editName;
                         self.phone.description = self.editDescription;
                         self.phone.snippet = self.editSnippet;
@@ -33,7 +34,6 @@ angular.
                         });
                     }
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
-                        //self.setImage(self.phone.images[0]);
                         self.editName = self.phone.name;
                         self.editDescription = self.phone.description;
                         self.editSnippet = self.phone.snippet;
@@ -41,15 +41,23 @@ angular.
                     });
                 }
 
-                self.uploadPic = function uploadPic(file) {
-                    self.Image = file;
+                self.uploadPic = function uploadPic(files) {
+                    self.Images = files;
+
                     //Image.save(self.Image);
-                    if (file) {
+                    angular.forEach(files, function (file) {
                         file.upload = Upload.upload({
                             url: 'api/image',
                             data: { file: file }
                         });
-                    }
+                        file.upload.then(function (response) {
+                            file.result = response.data;
+                            for (var i = 0; i < file.result.length; i++) {
+                                self.phone.images.push(file.result[i]);
+                            }
+
+                        });
+                    });
                 }
 
                 self.cancelChanges = function cancelChanges() {

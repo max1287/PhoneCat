@@ -55,7 +55,7 @@ namespace PhoneCat.Controllers
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
+            string root = HttpContext.Current.Server.MapPath("~/Content/img/");
             var provider = new MultipartFormDataStreamProvider(root);
 
             try
