@@ -135,7 +135,10 @@ namespace PhoneCat.Controllers
                 Name = phoneDetailDTO.Name,
                 Snippet = phoneDetailDTO.Snippet,
                 Age = phoneDetailDTO.Age,
-                Description = phoneDetailDTO.Description
+                Description = phoneDetailDTO.Description,
+                Storage = phoneDetailDTO.Storage,
+                SizeAndWeight = phoneDetailDTO.SizeAndWeight,
+                AdditionalFeatures = phoneDetailDTO.AdditionalFeatures                
             };
             List<Image> imgList = new List<Image>();
             for (int i = 0; i < phoneDetailDTO.Images.Count; i++)
@@ -145,6 +148,13 @@ namespace PhoneCat.Controllers
                 imgList.Add(img);
             }
             phone.Images = imgList;
+
+            var os = db.AndroidOs.SingleOrDefault(a => a.Version == phoneDetailDTO.Android.Os);
+            var userI = os.Androids.FirstOrDefault(u => u.Ui == phoneDetailDTO.Android.Ui);
+            if (userI == null)
+                phone.Android = new Android { Os = os, Ui = phoneDetailDTO.Android.Ui };
+            else phone.Android = userI;
+
             db.Phones.Add(phone);
             await db.SaveChangesAsync();
 
