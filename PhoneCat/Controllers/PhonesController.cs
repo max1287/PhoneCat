@@ -79,6 +79,8 @@ namespace PhoneCat.Controllers
             phone.Snippet = phoneDetailDTO.Snippet;
             phone.Description = phoneDetailDTO.Description;
             phone.Age = phoneDetailDTO.Age;
+            phone.Storage = phoneDetailDTO.Storage;
+            phone.SizeAndWeight = phoneDetailDTO.SizeAndWeight;
             List<Image> imgList = phone.Images.ToList();
             for(int i=0; i<phoneDetailDTO.Images.Count; i++)
             {
