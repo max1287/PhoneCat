@@ -44,12 +44,17 @@ namespace PhoneCat.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 Snippet = p.Snippet,
+                AdditionalFeatures = p.AdditionalFeatures,
                 Age = p.Age,
                 Images = p.Images.Select(g => g.ImageUrl).ToList(),
                 Storage = p.Storage,
-                SizeAndWeight = p.SizeAndWeight                
+                SizeAndWeight = p.SizeAndWeight,
+                Android = new AndroidDTO()
+                {
+                    Os = p.Android.Os.Version,
+                    Ui = p.Android.Ui
+                }        
             }).SingleOrDefaultAsync(p => p.Id == id);
-
             
 
             if (phone == null)
@@ -89,6 +94,12 @@ namespace PhoneCat.Controllers
                 if (imgList.Contains(img)==false) imgList.Add(img);
             }
             phone.Images = imgList;
+
+            var os = db.AndroidOs.SingleOrDefault(a => a.Version == phoneDetailDTO.Android.Os);
+            var userI = os.Androids.FirstOrDefault(u => u.Ui == phoneDetailDTO.Android.Ui);
+            if (userI == null)
+                phone.Android = new Android { Os = os, Ui = phoneDetailDTO.Android.Ui };
+            else phone.Android = userI;
 
             db.Entry(phone).State = EntityState.Modified;
 

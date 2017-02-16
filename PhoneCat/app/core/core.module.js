@@ -2,5 +2,5 @@
 
 angular.module('core', [
     'core.phone',
-    'core.image'
+    'core.androidOs'
 ]);

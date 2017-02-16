@@ -4,11 +4,11 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'Image','Upload',
-            function PhoneEditController($location, Phone, $routeParams, Image,Upload) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs','Upload',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, Upload) {
                 var self = this;
                 self.createOrUpdate = false;
-
+                self.androidOs = AndroidOs.query();
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
                     self.phone = new Phone;

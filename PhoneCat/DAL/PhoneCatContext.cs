@@ -12,6 +12,6 @@ namespace PhoneCat.DAL
         public PhoneCatContext() : base("PhoneCatContext") { }
         public DbSet<Phone> Phones {get; set;}
         public DbSet<Image> Images { get; set; }
-
+        public DbSet<AndroidOs> AndroidOs { get; set; }
     }
 }

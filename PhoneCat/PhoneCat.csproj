@@ -166,10 +166,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AndroidOsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PhonesController.cs" />
     <Compile Include="DAL\PhoneCatContext.cs" />
+    <Compile Include="DTO\AndroidDTO.cs" />
     <Compile Include="DTO\PhoneDetailDTO.cs" />
     <Compile Include="DTO\PhoneDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,7 +213,13 @@
     <Compile Include="Migrations\201702161344053_sizeAndWeight1.Designer.cs">
       <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161946381_additional-and-android.cs" />
+    <Compile Include="Migrations\201702161946381_additional-and-android.Designer.cs">
+      <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Android.cs" />
+    <Compile Include="Models\AndroidOs.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Models\SizeAndWeight.cs" />
@@ -219,8 +227,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\core\image\image.module.js" />
-    <Content Include="app\core\image\image.service.js" />
+    <Content Include="app\core\image\android-os.module.js" />
+    <Content Include="app\core\image\android-os.service.js" />
     <Content Include="app\phone-edit\phone-edit.component.js" />
     <Content Include="app\phone-edit\phone-edit.module.js" />
     <Content Include="app\phone-edit\phone-edit.template.html" />
@@ -416,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161344053_sizeAndWeight1.resx">
       <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161946381_additional-and-android.resx">
+      <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

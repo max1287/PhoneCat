@@ -82,9 +82,14 @@ Select File
         <span>Android</span>
         <dl>
             <dt>OS Version</dt>
-            <dd>{{$ctrl.phone.android.os}}</dd>
+            <dd>
+                <select ng-model="$ctrl.phone.android.os">
+                    <option value="{{item}}" ng-repeat="item in $ctrl.androidOs">{{item}}</option>
+                </select>
+            </dd>
             <dt>UI</dt>
-            <dd>{{$ctrl.phone.android.ui}}</dd>
+            <dd>
+            <input type="text" ng-model="$ctrl.phone.android.ui" /></dd>
         </dl>
     </li>
     <li>
