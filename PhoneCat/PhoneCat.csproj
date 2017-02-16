@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201702140757594_addImages1.Designer.cs">
       <DependentUpon>201702140757594_addImages1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161236334_one-to-many_images.cs" />
+    <Compile Include="Migrations\201702161236334_one-to-many_images.Designer.cs">
+      <DependentUpon>201702161236334_one-to-many_images.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
@@ -372,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702140757594_addImages1.resx">
       <DependentUpon>201702140757594_addImages1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161236334_one-to-many_images.resx">
+      <DependentUpon>201702161236334_one-to-many_images.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
