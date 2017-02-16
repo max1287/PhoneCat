@@ -203,9 +203,18 @@
     <Compile Include="Migrations\201702161329251_change_storage_type1.Designer.cs">
       <DependentUpon>201702161329251_change_storage_type1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161335577_sizeAndWeight.cs" />
+    <Compile Include="Migrations\201702161335577_sizeAndWeight.Designer.cs">
+      <DependentUpon>201702161335577_sizeAndWeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702161344053_sizeAndWeight1.cs" />
+    <Compile Include="Migrations\201702161344053_sizeAndWeight1.Designer.cs">
+      <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
+    <Compile Include="Models\SizeAndWeight.cs" />
     <Compile Include="Models\Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -401,6 +410,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161329251_change_storage_type1.resx">
       <DependentUpon>201702161329251_change_storage_type1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161335577_sizeAndWeight.resx">
+      <DependentUpon>201702161335577_sizeAndWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161344053_sizeAndWeight1.resx">
+      <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -70,9 +70,11 @@
         <span>Size and Weight</span>
         <dl>
             <dt>Dimensions</dt>
-            <dd ng-repeat="dim in $ctrl.phone.sizeAndWeight.dimensions">{{dim}}</dd>
+            <dd>Height: {{$ctrl.phone.sizeAndWeight.height}} mm.</dd>
+            <dd>Width: {{$ctrl.phone.sizeAndWeight.width}} mm.</dd>
+            <dd>Depth: {{$ctrl.phone.sizeAndWeight.depth}} mm.</dd>
             <dt>Weight</dt>
-            <dd>{{$ctrl.phone.sizeAndWeight.weight}}</dd>
+            <dd>{{$ctrl.phone.sizeAndWeight.weight}} g.</dd>
         </dl>
     </li>
     <li>

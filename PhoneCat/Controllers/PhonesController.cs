@@ -46,7 +46,8 @@ namespace PhoneCat.Controllers
                 Snippet = p.Snippet,
                 Age = p.Age,
                 Images = p.Images.Select(g => g.ImageUrl).ToList(),
-                Storage = p.Storage
+                Storage = p.Storage,
+                SizeAndWeight = p.SizeAndWeight                
             }).SingleOrDefaultAsync(p => p.Id == id);
 
             

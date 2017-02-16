@@ -17,5 +17,6 @@ namespace PhoneCat.Models
 
         public virtual ICollection<Image> Images { get; set; }
         public Storage Storage { get; set; }
+        public SizeAndWeight SizeAndWeight { get; set; }
     }
 }

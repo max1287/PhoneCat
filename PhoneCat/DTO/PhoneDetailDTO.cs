@@ -18,5 +18,6 @@ namespace PhoneCat.DTO
         public List<string> Images { get; set; }
 
         public Storage Storage { get; set; }
+        public SizeAndWeight SizeAndWeight { get; set; }
     }
 }
