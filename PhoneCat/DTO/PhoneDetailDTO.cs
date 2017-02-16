@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhoneCat.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace PhoneCat.DTO
         public int Age { get; set; }
         public string Snippet { get; set; }
         public List<string> Images { get; set; }
+
+        public Storage Storage { get; set; }
     }
 }

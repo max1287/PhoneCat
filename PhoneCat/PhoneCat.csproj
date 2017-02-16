@@ -191,9 +191,22 @@
     <Compile Include="Migrations\201702161236334_one-to-many_images.Designer.cs">
       <DependentUpon>201702161236334_one-to-many_images.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702161311389_add-storage.cs" />
+    <Compile Include="Migrations\201702161311389_add-storage.Designer.cs">
+      <DependentUpon>201702161311389_add-storage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702161326124_change_storage_type.cs" />
+    <Compile Include="Migrations\201702161326124_change_storage_type.Designer.cs">
+      <DependentUpon>201702161326124_change_storage_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702161329251_change_storage_type1.cs" />
+    <Compile Include="Migrations\201702161329251_change_storage_type1.Designer.cs">
+      <DependentUpon>201702161329251_change_storage_type1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
+    <Compile Include="Models\Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -379,6 +392,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161236334_one-to-many_images.resx">
       <DependentUpon>201702161236334_one-to-many_images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161311389_add-storage.resx">
+      <DependentUpon>201702161311389_add-storage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161326124_change_storage_type.resx">
+      <DependentUpon>201702161326124_change_storage_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702161329251_change_storage_type1.resx">
+      <DependentUpon>201702161329251_change_storage_type1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
