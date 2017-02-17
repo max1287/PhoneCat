@@ -18,29 +18,38 @@ angular.
 
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
-                    self.phone = new Phone;
+                    self.phone = new Object();
                     self.phone.images = [];
                     self.phone.availability = [];
-                    self.createChanges = function createChanges() {
-                        var resolutions = self.selectedResolution.split('x');
-                        self.phone.display.height = resolutions[0];
-                        self.phone.display.width = resolutions[1];
-                        Phone.save(self.phone, function () {
-                            $location.path('/phones')
-                        });
-                    }
+                    self.phone.battery = new Object();
+                    self.phone.android = new Object();
+                    self.phone.display = new Object();
+                    self.phone.storage = new Object();
+                    self.phone.sizeAndWeight = new Object();
                 }
                 else {//update
-                    self.saveChanges = function saveChanges() {
-                        var resolutions = self.selectedResolution.split('x');
-                        self.phone.display.height = resolutions[0];
-                        self.phone.display.width = resolutions[1];
-                        Phone.update({ phoneId: self.phone.id }, self.phone, function () {
-                            $location.path('/phones/' + self.phone.id)
-                        });
-                    }
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
                         self.selectedResolution = self.phone.display.height + 'x' + self.phone.display.width;
+                    });
+                }
+
+                self.createChanges = function createChanges() {
+                    var resolutions = self.selectedResolution.split('x');
+                    if (resolutions.count > 0) {
+                        self.phone.display.height = resolutions[0];
+                        self.phone.display.width = resolutions[1];
+                    }
+                    Phone.save(self.phone, function () {
+                        $location.path('/phones')
+                    });
+                }
+
+                self.saveChanges = function saveChanges() {
+                    var resolutions = self.selectedResolution.split('x');
+                    self.phone.display.height = resolutions[0];
+                    self.phone.display.width = resolutions[1];
+                    Phone.update({ phoneId: self.phone.id }, self.phone, function () {
+                        $location.path('/phones/' + self.phone.id)
                     });
                 }
 
