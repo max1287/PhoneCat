@@ -40,7 +40,19 @@ Select File
         <span>Availability and Networks</span>
         <dl>
             <dt>Availability</dt>
-            <dd ng-repeat="availability in $ctrl.phone.availability">{{availability}}</dd>
+            <dd ng-repeat="availability in $ctrl.phone.availability">
+                {{availability}}
+                <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteAvailabilityItem(availability)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </dd>
+            <dd>
+                <select ng-model="$ctrl.availabilityItem">
+                    <option value="{{item}}" ng-repeat="item in $ctrl.availability">{{item}}</option>
+                </select>
+                <button ng-click="$ctrl.addAvailabilityItem()">Add</button>
+            </dd>
+            
         </dl>
     </li>
     <li>

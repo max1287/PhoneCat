@@ -15,5 +15,15 @@ namespace PhoneCat.DAL
         public DbSet<AndroidOs> AndroidOs { get; set; }
         public DbSet<AndroidUi> AndroidUi { get; set; }
         public DbSet<BatteryType> BatteryTypes { get; set; }
+        public DbSet<Availability> Availabilities { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Phone>()
+                .HasMany(p=>p.Availability).WithMany(i => i.Phones)
+                .Map(t => t.MapLeftKey("PhoneId")
+                    .MapRightKey("AvailabilityId")
+                    .ToTable("PhoneAvailability"));
+        }
     }
 }

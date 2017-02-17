@@ -61,7 +61,8 @@ namespace PhoneCat.Controllers
                     Capacity = p.Battery.Capacity,
                     Type = p.BatteryType.Type,
                     TypeName = p.BatteryType.BatteryTypeName
-                } 
+                },
+                Availability = p.Availability.Select(a=>a.Name).ToList()
             }).SingleOrDefaultAsync(p => p.Id == id);
             
 
@@ -122,6 +123,25 @@ namespace PhoneCat.Controllers
             if (userI == null)
                 phone.AndroidUi = new AndroidUi { Name = phoneDetailDTO.Android.Ui };
             else phone.AndroidUi = userI;
+            //}
+            //availability{
+            List<Availability> availabilityList = phone.Availability.ToList();
+            for (int i = 0; i < phoneDetailDTO.Availability.Count; i++)
+            {
+                String s = phoneDetailDTO.Availability.ElementAt(i);
+                Availability availability = await db.Availabilities.SingleOrDefaultAsync(av => av.Name == s);
+                if (availabilityList.Contains(availability) == false) availabilityList.Add(availability);
+            }
+            for (int i=0; i<availabilityList.Count; i++)
+            {
+                if (phoneDetailDTO.Availability.IndexOf(availabilityList[i].Name) < 0)
+                {
+                    availabilityList.Remove(availabilityList[i]);
+                    i--;
+                }
+            }
+               
+            phone.Availability = availabilityList;
             //}
             db.Entry(phone).State = EntityState.Modified;
 
@@ -193,6 +213,16 @@ namespace PhoneCat.Controllers
             if (userI == null)
                 phone.AndroidUi = new AndroidUi { Name = phoneDetailDTO.Android.Ui };
             else phone.AndroidUi = userI;
+            //}
+            //availability{
+            List<Availability> availabilityList = new List<Availability>();
+            for (int i = 0; i < phoneDetailDTO.Availability.Count; i++)
+            {
+                String s = phoneDetailDTO.Availability.ElementAt(i);
+                Availability availability = await db.Availabilities.SingleOrDefaultAsync(av => av.Name == s);
+                availabilityList.Add(availability);
+            }
+            phone.Availability = availabilityList;
             //}
             db.Phones.Add(phone);
             await db.SaveChangesAsync();

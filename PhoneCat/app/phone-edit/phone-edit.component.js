@@ -4,17 +4,20 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload',
-            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
                 self.androidUi = AndroidUi.query();
+                self.availability = Availability.query();
                 self.batteryTypes = BatteryType.query();
+                self.addAvailabilityItem = "";
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
                     self.phone = new Phone;
                     self.phone.images = [];
+                    self.phone.availability = [];
                     self.createChanges = function createChanges() {
                         self.phone.name = self.editName;
                         self.phone.description = self.editDescription;
@@ -60,6 +63,20 @@ angular.
 
                         });
                     });
+                }
+
+                self.addAvailabilityItem = function addAvailabilityItem() {
+                    if (self.addAvailabilityItem != "") {
+                        if (self.phone.availability.indexOf(self.availabilityItem) < 0)
+                            self.phone.availability.push(self.availabilityItem);
+                        self.availabilityItem = "";
+                    }
+                }
+
+                self.deleteAvailabilityItem = function deleteAvailabilityItem(item) {
+                    var index = self.phone.availability.indexOf(item);
+                    if (index >= 0)
+                        self.phone.availability.splice(index,1);
                 }
 
                 self.cancelChanges = function cancelChanges() {

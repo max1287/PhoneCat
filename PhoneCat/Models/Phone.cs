@@ -23,5 +23,6 @@ namespace PhoneCat.Models
         public AndroidUi AndroidUi { get; set; }
         public Battery Battery { get; set; }
         public BatteryType BatteryType { get; set; }
+        public virtual ICollection<Availability> Availability { get; set; }
     }
 }

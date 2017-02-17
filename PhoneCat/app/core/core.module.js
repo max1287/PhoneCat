@@ -4,5 +4,6 @@ angular.module('core', [
     'core.phone',
     'core.androidOs',
     'core.androidUi',
-    'core.batteryType'
+    'core.batteryType',
+    'core.availability'
 ]);

@@ -58,6 +58,21 @@ namespace PhoneCat.Migrations
             batteryTypes.ForEach(b => context.BatteryTypes.AddOrUpdate(s => s.Type, b));
             context.SaveChanges();
 
+            var availabilities = new List<Availability>
+            {
+                new Availability {Name = "AT&T" },
+                new Availability {Name = "T-Mobile" },
+                new Availability {Name = "KT" },
+                new Availability {Name = "O2" },
+                new Availability {Name = "Orange" },
+                new Availability {Name = "Singtel" },
+                new Availability {Name = "StarHub" },
+                new Availability {Name = "Vodafone" },
+                new Availability {Name = "M1" }
+            };
+            availabilities.ForEach(a => context.Availabilities.AddOrUpdate(s => s.Name, a));
+            context.SaveChanges();
+
             var phones = new List<Phone>
             {
                 new Phone {Name = "LG-Axis", Age = 1,
@@ -171,6 +186,21 @@ namespace PhoneCat.Migrations
             AddOrUpdatePhoneBatteryType(context, "MOTOROLA XOOM\u2122", "Li-Pol");
             context.SaveChanges();
 
+            AddOrUpdatePhoneAvailability(context, "LG-Axis", 1);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 1);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 2);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 3);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 4);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 5);
+            AddOrUpdatePhoneAvailability(context, "Nexus S", 6);
+            AddOrUpdatePhoneAvailability(context, "Samsung Galaxy Tab\u2122", 1);
+            AddOrUpdatePhoneAvailability(context, "Samsung Galaxy Tab\u2122", 5);
+            AddOrUpdatePhoneAvailability(context, "Samsung Galaxy Tab\u2122", 7);
+            AddOrUpdatePhoneAvailability(context, "MOTOROLA ATRIX\u2122 4G", 1);
+            AddOrUpdatePhoneAvailability(context, "MOTOROLA ATRIX\u2122 4G", 9);
+            AddOrUpdatePhoneAvailability(context, "MOTOROLA XOOM\u2122", 1);
+            AddOrUpdatePhoneAvailability(context, "MOTOROLA XOOM\u2122", 8);
+            context.SaveChanges();
         }
 
         void AddOrUpdatePhoneImage(PhoneCatContext context, string phoneName, int imageId)
@@ -194,6 +224,14 @@ namespace PhoneCat.Migrations
             var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
             var batType = context.BatteryTypes.FirstOrDefault(b => b.Type == type);
             phn.BatteryType = batType;
+        }
+
+        void AddOrUpdatePhoneAvailability(PhoneCatContext context, string phoneName, int availability)
+        {
+            var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            var av = phn.Availability.SingleOrDefault(a => a.Id == availability);
+            if (av == null)
+                phn.Availability.Add(context.Availabilities.Single(i => i.Id == availability));
         }
     }
 }

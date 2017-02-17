@@ -6,5 +6,6 @@ angular.module('phoneEdit', [
     'core.androidOs',
     'core.androidUi',
     'core.batteryType',
+    'core.availability',
     'ngFileUpload'
 ]);

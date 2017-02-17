@@ -22,5 +22,6 @@ namespace PhoneCat.DTO
         public SizeAndWeight SizeAndWeight { get; set; }
         public AndroidDTO Android { get; set; }
         public BatteryDTO Battery { get; set; }
+        public List<string> Availability { get; set; }
     }
 }
