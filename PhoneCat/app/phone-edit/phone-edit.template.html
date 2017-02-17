@@ -13,6 +13,9 @@
         <ul class="phone-thumbs">
             <li ng-repeat="img in $ctrl.phone.images">
             <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
+                <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteImage(img)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
             </li>
         </ul>
      </div>

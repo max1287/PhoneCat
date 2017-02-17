@@ -77,6 +77,12 @@ angular.
                         self.phone.availability.splice(index,1);
                 }
 
+                self.deleteImage = function deleteImage(image) {
+                    var index = self.phone.images.indexOf(image);
+                    if (index >= 0)
+                        self.phone.images.splice(index, 1);
+                }
+
                 self.cancelChanges = function cancelChanges() {
                     $location.path('/phones/' + (self.createOrUpdate ? "" : self.phone.id))
                 }

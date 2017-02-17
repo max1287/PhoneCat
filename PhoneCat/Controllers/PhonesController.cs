@@ -122,6 +122,14 @@ namespace PhoneCat.Controllers
                 Image img = await db.Images.SingleOrDefaultAsync(pic => pic.ImageUrl == s);
                 if (imgList.Contains(img)==false) imgList.Add(img);
             }
+            for (int i = 0; i < imgList.Count; i++)
+            {
+                if (phoneDetailDTO.Images.IndexOf(imgList[i].ImageUrl) < 0)
+                {
+                    imgList.Remove(imgList[i]);
+                    i--;
+                }
+            }
             phone.Images = imgList;
             //}
 
