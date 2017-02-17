@@ -167,11 +167,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AndroidOsController.cs" />
+    <Compile Include="Controllers\AndroidUiController.cs" />
+    <Compile Include="Controllers\BatteryTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PhonesController.cs" />
     <Compile Include="DAL\PhoneCatContext.cs" />
     <Compile Include="DTO\AndroidDTO.cs" />
+    <Compile Include="DTO\BatteryDTO.cs" />
     <Compile Include="DTO\PhoneDetailDTO.cs" />
     <Compile Include="DTO\PhoneDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,9 +220,32 @@
     <Compile Include="Migrations\201702161946381_additional-and-android.Designer.cs">
       <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702170725459_addBattery.cs" />
+    <Compile Include="Migrations\201702170725459_addBattery.Designer.cs">
+      <DependentUpon>201702170725459_addBattery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702170754584_addBattery1.cs" />
+    <Compile Include="Migrations\201702170754584_addBattery1.Designer.cs">
+      <DependentUpon>201702170754584_addBattery1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702170756592_addBattery2.cs" />
+    <Compile Include="Migrations\201702170756592_addBattery2.Designer.cs">
+      <DependentUpon>201702170756592_addBattery2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702170800081_addBattery3.cs" />
+    <Compile Include="Migrations\201702170800081_addBattery3.Designer.cs">
+      <DependentUpon>201702170800081_addBattery3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702170815549_fixAndroid.cs" />
+    <Compile Include="Migrations\201702170815549_fixAndroid.Designer.cs">
+      <DependentUpon>201702170815549_fixAndroid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Android.cs" />
     <Compile Include="Models\AndroidOs.cs" />
+    <Compile Include="Models\AndroidUi.cs" />
+    <Compile Include="Models\Battery.cs" />
+    <Compile Include="Models\BatteryType.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
     <Compile Include="Models\SizeAndWeight.cs" />
@@ -227,8 +253,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\core\image\android-os.module.js" />
-    <Content Include="app\core\image\android-os.service.js" />
+    <Content Include="app\core\battery-type\battery-type.module.js" />
+    <Content Include="app\core\battery-type\battery-type.service.js" />
+    <Content Include="app\core\android-ui\android-ui.module.js" />
+    <Content Include="app\core\android-ui\android-ui.service.js" />
+    <Content Include="app\core\android-os\android-os.module.js" />
+    <Content Include="app\core\android-os\android-os.service.js" />
     <Content Include="app\phone-edit\phone-edit.component.js" />
     <Content Include="app\phone-edit\phone-edit.module.js" />
     <Content Include="app\phone-edit\phone-edit.template.html" />
@@ -427,6 +457,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161946381_additional-and-android.resx">
       <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170725459_addBattery.resx">
+      <DependentUpon>201702170725459_addBattery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170754584_addBattery1.resx">
+      <DependentUpon>201702170754584_addBattery1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170756592_addBattery2.resx">
+      <DependentUpon>201702170756592_addBattery2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170800081_addBattery3.resx">
+      <DependentUpon>201702170800081_addBattery3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702170815549_fixAndroid.resx">
+      <DependentUpon>201702170815549_fixAndroid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

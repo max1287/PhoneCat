@@ -19,6 +19,9 @@ namespace PhoneCat.Models
         public virtual ICollection<Image> Images { get; set; }
         public Storage Storage { get; set; }
         public SizeAndWeight SizeAndWeight { get; set; }
-        public Android Android { get; set; }
+        public AndroidOs AndroidOs { get; set; }
+        public AndroidUi AndroidUi { get; set; }
+        public Battery Battery { get; set; }
+        public BatteryType BatteryType { get; set; }
     }
 }

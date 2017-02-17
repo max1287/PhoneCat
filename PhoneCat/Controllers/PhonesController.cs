@@ -51,9 +51,17 @@ namespace PhoneCat.Controllers
                 SizeAndWeight = p.SizeAndWeight,
                 Android = new AndroidDTO()
                 {
-                    Os = p.Android.Os.Version,
-                    Ui = p.Android.Ui
-                }        
+                    Os = p.AndroidOs.Version,
+                    Ui = p.AndroidUi.Name
+                },
+                Battery = new BatteryDTO()
+                {
+                    StandbyTime = p.Battery.StandbyTime,
+                    TalkTime = p.Battery.TalkTime,
+                    Capacity = p.Battery.Capacity,
+                    Type = p.BatteryType.Type,
+                    TypeName = p.BatteryType.BatteryTypeName
+                } 
             }).SingleOrDefaultAsync(p => p.Id == id);
             
 
@@ -86,6 +94,16 @@ namespace PhoneCat.Controllers
             phone.Age = phoneDetailDTO.Age;
             phone.Storage = phoneDetailDTO.Storage;
             phone.SizeAndWeight = phoneDetailDTO.SizeAndWeight;
+            //battery{
+            phone.Battery.StandbyTime = phoneDetailDTO.Battery.StandbyTime;
+            phone.Battery.TalkTime = phoneDetailDTO.Battery.TalkTime;
+            phone.Battery.Capacity = phoneDetailDTO.Battery.Capacity;
+            var batType = db.BatteryTypes.SingleOrDefault(b => b.Type == phoneDetailDTO.Battery.Type);
+            if (batType == null)
+                phone.BatteryType = new BatteryType { Type = phoneDetailDTO.Battery.Type , BatteryTypeName = phoneDetailDTO.Battery.TypeName};
+            else phone.BatteryType = batType;
+            //}
+            //image{
             List<Image> imgList = phone.Images.ToList();
             for(int i=0; i<phoneDetailDTO.Images.Count; i++)
             {
@@ -94,13 +112,17 @@ namespace PhoneCat.Controllers
                 if (imgList.Contains(img)==false) imgList.Add(img);
             }
             phone.Images = imgList;
-
+            //}
+            //android{
             var os = db.AndroidOs.SingleOrDefault(a => a.Version == phoneDetailDTO.Android.Os);
-            var userI = os.Androids.FirstOrDefault(u => u.Ui == phoneDetailDTO.Android.Ui);
+            if (os == null)
+                phone.AndroidOs = new AndroidOs { Version = phoneDetailDTO.Android.Os };
+            else phone.AndroidOs = os;
+            var userI = db.AndroidUi.FirstOrDefault(u => u.Name == phoneDetailDTO.Android.Ui);
             if (userI == null)
-                phone.Android = new Android { Os = os, Ui = phoneDetailDTO.Android.Ui };
-            else phone.Android = userI;
-
+                phone.AndroidUi = new AndroidUi { Name = phoneDetailDTO.Android.Ui };
+            else phone.AndroidUi = userI;
+            //}
             db.Entry(phone).State = EntityState.Modified;
 
             try
@@ -140,6 +162,19 @@ namespace PhoneCat.Controllers
                 SizeAndWeight = phoneDetailDTO.SizeAndWeight,
                 AdditionalFeatures = phoneDetailDTO.AdditionalFeatures                
             };
+            //battery{
+            phone.Battery = new Battery
+            {
+                StandbyTime = phoneDetailDTO.Battery.StandbyTime,
+                TalkTime = phoneDetailDTO.Battery.TalkTime,
+                Capacity = phoneDetailDTO.Battery.Capacity
+            };
+            var batType = db.BatteryTypes.SingleOrDefault(b => b.Type == phoneDetailDTO.Battery.Type);
+            if (batType == null)
+                phone.BatteryType = new BatteryType { Type = phoneDetailDTO.Battery.Type, BatteryTypeName = phoneDetailDTO.Battery.TypeName };
+            else phone.BatteryType = batType;
+            //}
+            //image{
             List<Image> imgList = new List<Image>();
             for (int i = 0; i < phoneDetailDTO.Images.Count; i++)
             {
@@ -148,13 +183,17 @@ namespace PhoneCat.Controllers
                 imgList.Add(img);
             }
             phone.Images = imgList;
-
+            //}
+            //android{
             var os = db.AndroidOs.SingleOrDefault(a => a.Version == phoneDetailDTO.Android.Os);
-            var userI = os.Androids.FirstOrDefault(u => u.Ui == phoneDetailDTO.Android.Ui);
+            if (os == null)
+                phone.AndroidOs = new AndroidOs { Version = phoneDetailDTO.Android.Os };
+            else phone.AndroidOs = os;
+            var userI = db.AndroidUi.FirstOrDefault(u => u.Name == phoneDetailDTO.Android.Ui);
             if (userI == null)
-                phone.Android = new Android { Os = os, Ui = phoneDetailDTO.Android.Ui };
-            else phone.Android = userI;
-
+                phone.AndroidUi = new AndroidUi { Name = phoneDetailDTO.Android.Ui };
+            else phone.AndroidUi = userI;
+            //}
             db.Phones.Add(phone);
             await db.SaveChangesAsync();
 

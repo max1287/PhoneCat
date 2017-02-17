@@ -13,5 +13,7 @@ namespace PhoneCat.DAL
         public DbSet<Phone> Phones {get; set;}
         public DbSet<Image> Images { get; set; }
         public DbSet<AndroidOs> AndroidOs { get; set; }
+        public DbSet<AndroidUi> AndroidUi { get; set; }
+        public DbSet<BatteryType> BatteryTypes { get; set; }
     }
 }

@@ -2,5 +2,7 @@
 
 angular.module('core', [
     'core.phone',
-    'core.androidOs'
+    'core.androidOs',
+    'core.androidUi',
+    'core.batteryType'
 ]);

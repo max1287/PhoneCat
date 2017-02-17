@@ -47,7 +47,11 @@ Select File
         <span>Battery</span>
         <dl>
             <dt>Type</dt>
-            <dd>{{$ctrl.phone.battery.type}}</dd>
+            <dd>
+                <select ng-model="$ctrl.phone.battery.type">
+                    <option value="{{item}}" ng-repeat="item in $ctrl.batteryTypes">{{item}}</option>
+                </select>
+            </dd>
             <dt>Talk Time</dt>
             <dd>{{$ctrl.phone.battery.talkTime}}</dd>
             <dt>Standby time (max)</dt>
@@ -89,7 +93,10 @@ Select File
             </dd>
             <dt>UI</dt>
             <dd>
-            <input type="text" ng-model="$ctrl.phone.android.ui" /></dd>
+                <select ng-model="$ctrl.phone.android.ui">
+                    <option value="{{item}}" ng-repeat="item in $ctrl.androidUi">{{item}}</option>
+                </select>
+            </dd>
         </dl>
     </li>
     <li>
