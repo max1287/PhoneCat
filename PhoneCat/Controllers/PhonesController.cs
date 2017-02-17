@@ -103,7 +103,7 @@ namespace PhoneCat.Controllers
             phone.Age = phoneDetailDTO.Age;
             phone.Storage = phoneDetailDTO.Storage;
             phone.SizeAndWeight = phoneDetailDTO.SizeAndWeight;
-
+            phone.AdditionalFeatures = phoneDetailDTO.AdditionalFeatures;
             //battery{
             phone.Battery.StandbyTime = phoneDetailDTO.Battery.StandbyTime;
             phone.Battery.TalkTime = phoneDetailDTO.Battery.TalkTime;

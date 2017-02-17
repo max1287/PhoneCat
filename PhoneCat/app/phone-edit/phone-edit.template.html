@@ -1,82 +1,116 @@
-﻿<br />
-<br />
-<div class="container-fluid">
+﻿<div>
+ <form>
+                <label for="$ctrl.name">Name:</label>
+                <input class="form-control" ng-model="$ctrl.phone.name" />
+                <label for="$ctrl.description">Description:</label>
+                <textarea class="form-control" rows="5" ng-model="$ctrl.phone.description"></textarea>
+                <label for="$ctrl.snippet">Snippet:</label>
+                <textarea class="form-control" rows="5" ng-model="$ctrl.phone.snippet"></textarea>
+                <label for="$ctrl.age">Age:</label>
+                <input class="form-control" ng-model="$ctrl.phone.age" />
+</form>
     <div class="row">
-        <div class="col-lg-12">
-           <form>
-                <label for="$ctrl.editName">Name:</label>
-                <input class="form-control" ng-model="$ctrl.editName" />
-                <label for="$ctrl.editDescription">Description:</label>
-                <textarea class="form-control" rows="5" ng-model="$ctrl.editDescription"></textarea>
-                <label for="$ctrl.editSnippet">Snippet:</label>
-                <textarea class="form-control" rows="5" ng-model="$ctrl.editSnippet"></textarea>
-                <label for="$ctrl.editAge">Age:</label>
-                <input class="form-control" ng-model="$ctrl.editAge" />
-            </form>
-        </div>
-    </div>
-</div>
-
-<button ng-show="!$ctrl.createOrUpdate" ng-click="$ctrl.saveChanges()" class="btn btn-danger">Save</button>
-<button ng-show="$ctrl.createOrUpdate" ng-click="$ctrl.createChanges()" class="btn btn-danger">Create</button>
-<button ng-click="$ctrl.cancelChanges()" class="btn btn-danger">Cancel</button>
-
-<ul class="phone-thumbs">
-    <li ng-repeat="img in $ctrl.phone.images">
-        <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
-    </li>
-</ul>
-
-<button type="file" ngf-select="$ctrl.uploadPic($files)"
-     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ngf-multiple="true">
-Select File
-</button>
-
+        <ul class="phone-thumbs">
+            <li ng-repeat="img in $ctrl.phone.images">
+            <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
+            </li>
+        </ul>
+     </div>
+    
+            <button type="file" class="form-control-file" ngf-select="$ctrl.uploadPic($files)"
+                    accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ngf-multiple="true">
+                Upload Image
+            </button>
+<br /><br />
 <ul class="specs">
     <li>
         <span>Availability and Networks</span>
-        <dl>
-            <dt>Availability</dt>
-            <dd ng-repeat="availability in $ctrl.phone.availability">
-                {{availability}}
-                <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteAvailabilityItem(availability)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </dd>
-            <dd>
-                <select ng-model="$ctrl.availabilityItem">
-                    <option value="{{item}}" ng-repeat="item in $ctrl.availability">{{item}}</option>
-                </select>
-                <button ng-click="$ctrl.addAvailabilityItem()">Add</button>
-            </dd>
-            
-        </dl>
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr><th>Availability</th></tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="availability in $ctrl.phone.availability">
+                    <td>
+                        {{availability}}
+                    </td>
+                    <td>
+                        <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteAvailabilityItem(availability)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <select class="form-control" ng-model="$ctrl.availabilityItem">
+                            <option value="{{item}}" ng-repeat="item in $ctrl.availability">{{item}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ng-click="$ctrl.addAvailabilityItem()">Add</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </li>
     <li>
         <span>Battery</span>
-        <dl>
-            <dt>Type</dt>
-            <dd>
-                <select ng-model="$ctrl.phone.battery.type">
-                    <option value="{{item}}" ng-repeat="item in $ctrl.batteryTypes">{{item}}</option>
-                </select>
-            </dd>
-            <dt>Capacity</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.battery.capacity" />mAh</dd>
-            <dt>Talk Time</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.battery.talkTime" />hours</dd>
-            <dt>Standby time (max)</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.battery.standbyTime" />hours</dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr><th>Type</th></tr>
+                <tr>
+                    <td>
+                        <select class="form-control" ng-model="$ctrl.phone.battery.type">
+                            <option value="{{item}}" ng-repeat="item in $ctrl.batteryTypes">{{item}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><th>Capacity</th></tr>
+                <tr>
+                    <td>
+                        <input class="form-control" ng-model="$ctrl.phone.battery.capacity" /> 
+                    </td>
+                    <td>mAh</td>
+                </tr>
+                <tr><th>Talk Time</th></tr>
+                <tr>
+                    <td>
+                        <input class="form-control" ng-model="$ctrl.phone.battery.talkTime" />
+                    </td>
+                    <td>hours</td>
+                </tr>
+                <tr><th>Standby time (max)</th></tr>
+                <tr>
+                    <td>
+                        <input class="form-control" ng-model="$ctrl.phone.battery.standbyTime" />
+                    </td>
+                    <td>hours</td>
+                </tr>
+            </tbody>
+        </table>
     </li>
     <li>
         <span>Storage and Memory</span>
-        <dl>
-            <dt>RAM</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.storage.ram" /> MB</dd>
-            <dt>Internal Storage</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.storage.flash" /> MB</dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr><th>RAM</th></tr>
+                <tr>
+                    <td>
+                        <input class="form-control" ng-model="$ctrl.phone.storage.ram" />
+                    </td>
+                    <td>MB</td>
+                </tr>
+                <tr><th>Internal Storage</th></tr>
+                <tr>
+                    <td>
+                        <input class="form-control" ng-model="$ctrl.phone.storage.flash" />
+                    </td>
+                    <td>MB</td>
+                </tr>
+            </tbody>
+        </table>
     </li>
     <li>
         <span>Connectivity</span>
@@ -98,13 +132,13 @@ Select File
         <dl>
             <dt>OS Version</dt>
             <dd>
-                <select ng-model="$ctrl.phone.android.os">
+                <select class="form-control" ng-model="$ctrl.phone.android.os">
                     <option value="{{item}}" ng-repeat="item in $ctrl.androidOs">{{item}}</option>
                 </select>
             </dd>
             <dt>UI</dt>
             <dd>
-                <select ng-model="$ctrl.phone.android.ui">
+                <select class="form-control" ng-model="$ctrl.phone.android.ui">
                     <option value="{{item}}" ng-repeat="item in $ctrl.androidUi">{{item}}</option>
                 </select>
             </dd>
@@ -112,32 +146,56 @@ Select File
     </li>
     <li>
         <span>Size and Weight</span>
-        <dl>
-            <dt>Dimensions</dt>
-            <dd>Height: 
-            <input type="text" ng-model="$ctrl.phone.sizeAndWeight.height" />mm.</dd>
-            <dd>Width: 
-            <input type="text" ng-model="$ctrl.phone.sizeAndWeight.width" /> mm.</dd>
-            <dd>Depth: 
-            <input type="text" ng-model="$ctrl.phone.sizeAndWeight.depth" /> mm.</dd>
-            <dt>Weight</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.sizeAndWeight.weight" /> g.</dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr><th></th><th>Dimensions</th><th></th></tr>
+                <tr>
+                    <td>Height:</td>
+                    <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.height" /></td>
+                    <td>mm.</td>
+                </tr>
+                <tr>
+                    <td>Width:</td>
+                    <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.width" /></td>
+                    <td>mm.</td>
+                </tr>
+                <tr>
+                    <td>Depth:</td>
+                    <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.depth" /></td>
+                    <td>mm.</td>
+                </tr>
+                <tr><th></th><th>Weight</th><th></th></tr>
+                <tr>
+                    <td></td>
+                    <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.weight" /></td>
+                    <td>g.</td>
+                </tr>
+            </tbody>
+        </table>
     </li>
     <li>
         <span>Display</span>
-        <dl>
-            <dt>Screen size</dt>
-            <dd><input type="text" ng-model="$ctrl.phone.display.screenSize" />inches</dd>
-            <dt>Screen resolution</dt>
-            <dd>
-                <select ng-model="$ctrl.selectedResolution">
-                    <option value="{{item}}" ng-repeat="item in $ctrl.displayResolutions">{{item}}</option>
-                </select>
-            </dd>
-            <dt>Touch screen</dt>
-            <dd><input type="checkbox" ng-model="$ctrl.phone.display.touchScreen" /></dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr><th>Screen size</th></tr>
+                <tr>
+                    <td><input class="form-control" ng-model="$ctrl.phone.display.screenSize" /></td>
+                    <td>inches</td>
+                </tr>
+                <tr><th>Screen resolution</th></tr>
+                <tr>
+                    <td>
+                        <select class="form-control" ng-model="$ctrl.selectedResolution">
+                            <option value="{{item}}" ng-repeat="item in $ctrl.displayResolutions">{{item}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Touch Screen:</th>
+                    <td><input type="checkbox" class="form-control" ng-model="$ctrl.phone.display.touchScreen" /></td>
+                </tr>
+            </tbody>
+        </table>
     </li>
     <li>
         <span>Hardware</span>
@@ -168,3 +226,10 @@ Select File
         <dd><textarea class="form-control" rows="5" ng-model="$ctrl.phone.additionalFeatures"></textarea></dd>
     </li>
 </ul>
+</div>
+<br />
+<div class="row">
+    <button ng-show="!$ctrl.createOrUpdate" ng-click="$ctrl.saveChanges()" class="btn btn-danger">Save</button>
+    <button ng-show="$ctrl.createOrUpdate" ng-click="$ctrl.createChanges()" class="btn btn-danger">Create</button>
+    <button ng-click="$ctrl.cancelChanges()" class="btn btn-danger">Cancel</button>
+</div>

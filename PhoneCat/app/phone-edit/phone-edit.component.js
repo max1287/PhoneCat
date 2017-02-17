@@ -15,16 +15,13 @@ angular.
                 self.displayResolutions = DisplayResolution.query();
                 self.selectedResolution = "";
                 self.addAvailabilityItem = "";
+
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
                     self.phone = new Phone;
                     self.phone.images = [];
                     self.phone.availability = [];
                     self.createChanges = function createChanges() {
-                        self.phone.name = self.editName;
-                        self.phone.description = self.editDescription;
-                        self.phone.snippet = self.editSnippet;
-                        self.phone.age = self.editAge;
                         var resolutions = self.selectedResolution.split('x');
                         self.phone.display.height = resolutions[0];
                         self.phone.display.width = resolutions[1];
@@ -35,10 +32,6 @@ angular.
                 }
                 else {//update
                     self.saveChanges = function saveChanges() {
-                        self.phone.name = self.editName;
-                        self.phone.description = self.editDescription;
-                        self.phone.snippet = self.editSnippet;
-                        self.phone.age = self.editAge;
                         var resolutions = self.selectedResolution.split('x');
                         self.phone.display.height = resolutions[0];
                         self.phone.display.width = resolutions[1];
@@ -47,10 +40,6 @@ angular.
                         });
                     }
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
-                        self.editName = self.phone.name;
-                        self.editDescription = self.phone.description;
-                        self.editSnippet = self.phone.snippet;
-                        self.editAge = self.phone.age;
                         self.selectedResolution = self.phone.display.height + 'x' + self.phone.display.width;
                     });
                 }
