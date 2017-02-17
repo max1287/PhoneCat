@@ -23,5 +23,6 @@ namespace PhoneCat.DTO
         public AndroidDTO Android { get; set; }
         public BatteryDTO Battery { get; set; }
         public List<string> Availability { get; set; }
+        public DisplayDTO Display { get; set; }
     }
 }

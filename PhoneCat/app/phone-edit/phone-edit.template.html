@@ -21,9 +21,6 @@
 <button ng-show="$ctrl.createOrUpdate" ng-click="$ctrl.createChanges()" class="btn btn-danger">Create</button>
 <button ng-click="$ctrl.cancelChanges()" class="btn btn-danger">Cancel</button>
 
-<input type="text" ng-model="$ctrl.phone.name" />
-{{$ctrl.phone.name}}
-{{$ctrl.phone.images.count}}
 <ul class="phone-thumbs">
     <li ng-repeat="img in $ctrl.phone.images">
         <img ng-src="/api/image?imageUrl={{img}}" ng-click="$ctrl.setImage(img)" />
@@ -64,10 +61,12 @@ Select File
                     <option value="{{item}}" ng-repeat="item in $ctrl.batteryTypes">{{item}}</option>
                 </select>
             </dd>
+            <dt>Capacity</dt>
+            <dd><input type="text" ng-model="$ctrl.phone.battery.capacity" />mAh</dd>
             <dt>Talk Time</dt>
-            <dd>{{$ctrl.phone.battery.talkTime}}</dd>
+            <dd><input type="text" ng-model="$ctrl.phone.battery.talkTime" />hours</dd>
             <dt>Standby time (max)</dt>
-            <dd>{{$ctrl.phone.battery.standbyTime}}</dd>
+            <dd><input type="text" ng-model="$ctrl.phone.battery.standbyTime" />hours</dd>
         </dl>
     </li>
     <li>
@@ -129,11 +128,15 @@ Select File
         <span>Display</span>
         <dl>
             <dt>Screen size</dt>
-            <dd>{{$ctrl.phone.display.screenSize}}</dd>
+            <dd><input type="text" ng-model="$ctrl.phone.display.screenSize" />inches</dd>
             <dt>Screen resolution</dt>
-            <dd>{{$ctrl.phone.display.screenResolution}}</dd>
+            <dd>
+                <select ng-model="$ctrl.selectedResolution">
+                    <option value="{{item}}" ng-repeat="item in $ctrl.displayResolutions">{{item}}</option>
+                </select>
+            </dd>
             <dt>Touch screen</dt>
-            <dd>{{$ctrl.phone.display.touchScreen}}</dd>
+            <dd><input type="checkbox" ng-model="$ctrl.phone.display.touchScreen" /></dd>
         </dl>
     </li>
     <li>
@@ -162,6 +165,6 @@ Select File
     </li>
     <li>
         <span>Additional Features</span>
-        <dd>{{$ctrl.phone.additionalFeatures}}</dd>
+        <dd><textarea class="form-control" rows="5" ng-model="$ctrl.phone.additionalFeatures"></textarea></dd>
     </li>
 </ul>

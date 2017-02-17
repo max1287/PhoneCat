@@ -34,6 +34,8 @@ namespace PhoneCat
                         "~/app/core/battery-type/battery-type.service.js",
                         "~/app/core/availability/availability.module.js",
                         "~/app/core/availability/availability.service.js",
+                        "~/app/core/display-resolution/display-resolution.module.js",
+                        "~/app/core/display-resolution/display-resolution.service.js",
                         "~/app/phone-list/phone-list.module.js",
                         "~/app/phone-list/phone-list.component.js",
                         "~/app/phone-detail/phone-detail.module.js",

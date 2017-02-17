@@ -16,7 +16,7 @@ namespace PhoneCat.DAL
         public DbSet<AndroidUi> AndroidUi { get; set; }
         public DbSet<BatteryType> BatteryTypes { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
-
+        public DbSet<DisplayResolution> DisplayResolutions { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Phone>()

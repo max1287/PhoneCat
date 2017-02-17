@@ -26,20 +26,20 @@
         <span>Battery</span>
         <dl>
             <dt>Type</dt>
-            <dd>{{$ctrl.phone.battery.type}}</dd>
+            <dd>{{$ctrl.phone.battery.typeName}} ({{$ctrl.phone.battery.type}}) ({{$ctrl.phone.battery.capacity}}mAh)</dd>
             <dt>Talk Time</dt>
-            <dd>{{$ctrl.phone.battery.talkTime}}</dd>
+            <dd>{{$ctrl.phone.battery.talkTime}} hours</dd>
             <dt>Standby time (max)</dt>
-            <dd>{{$ctrl.phone.battery.standbyTime}}</dd>
+            <dd>{{$ctrl.phone.battery.standbyTime}} hours</dd>
         </dl>
     </li>
     <li>
         <span>Storage and Memory</span>
         <dl>
             <dt>RAM</dt>
-            <dd>{{$ctrl.phone.storage.ram}}</dd>
+            <dd>{{$ctrl.phone.storage.ram}} MB</dd>
             <dt>Internal Storage</dt>
-            <dd>{{$ctrl.phone.storage.flash}}</dd>
+            <dd>{{$ctrl.phone.storage.flash}} MB</dd>
         </dl>
     </li>
     <li>
@@ -81,9 +81,9 @@
         <span>Display</span>
         <dl>
             <dt>Screen size</dt>
-            <dd>{{$ctrl.phone.display.screenSize}}</dd>
+            <dd>{{$ctrl.phone.display.screenSize}} inches</dd>
             <dt>Screen resolution</dt>
-            <dd>{{$ctrl.phone.display.screenResolution}}</dd>
+            <dd>{{$ctrl.phone.display.name}}({{$ctrl.phone.display.height}}x{{$ctrl.phone.display.width}})</dd>
             <dt>Touch screen</dt>
             <dd>{{$ctrl.phone.display.touchScreen}}</dd>
         </dl>

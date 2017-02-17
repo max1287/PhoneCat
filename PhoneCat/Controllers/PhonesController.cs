@@ -62,7 +62,15 @@ namespace PhoneCat.Controllers
                     Type = p.BatteryType.Type,
                     TypeName = p.BatteryType.BatteryTypeName
                 },
-                Availability = p.Availability.Select(a=>a.Name).ToList()
+                Availability = p.Availability.Select(a=>a.Name).ToList(),
+                Display = new DisplayDTO()
+                {
+                    ScreenSize = p.Display.ScreenSize,
+                    TouchScreen = p.Display.TouchScreen,
+                    Height = p.DisplayResolution.Height,
+                    Width = p.DisplayResolution.Width,
+                    Name = p.DisplayResolution.Name
+                }
             }).SingleOrDefaultAsync(p => p.Id == id);
             
 
@@ -95,6 +103,7 @@ namespace PhoneCat.Controllers
             phone.Age = phoneDetailDTO.Age;
             phone.Storage = phoneDetailDTO.Storage;
             phone.SizeAndWeight = phoneDetailDTO.SizeAndWeight;
+
             //battery{
             phone.Battery.StandbyTime = phoneDetailDTO.Battery.StandbyTime;
             phone.Battery.TalkTime = phoneDetailDTO.Battery.TalkTime;
@@ -104,6 +113,7 @@ namespace PhoneCat.Controllers
                 phone.BatteryType = new BatteryType { Type = phoneDetailDTO.Battery.Type , BatteryTypeName = phoneDetailDTO.Battery.TypeName};
             else phone.BatteryType = batType;
             //}
+
             //image{
             List<Image> imgList = phone.Images.ToList();
             for(int i=0; i<phoneDetailDTO.Images.Count; i++)
@@ -114,6 +124,7 @@ namespace PhoneCat.Controllers
             }
             phone.Images = imgList;
             //}
+
             //android{
             var os = db.AndroidOs.SingleOrDefault(a => a.Version == phoneDetailDTO.Android.Os);
             if (os == null)
@@ -124,6 +135,7 @@ namespace PhoneCat.Controllers
                 phone.AndroidUi = new AndroidUi { Name = phoneDetailDTO.Android.Ui };
             else phone.AndroidUi = userI;
             //}
+
             //availability{
             List<Availability> availabilityList = phone.Availability.ToList();
             for (int i = 0; i < phoneDetailDTO.Availability.Count; i++)
@@ -140,9 +152,18 @@ namespace PhoneCat.Controllers
                     i--;
                 }
             }
-               
             phone.Availability = availabilityList;
             //}
+
+            //display{
+            phone.Display.ScreenSize = phoneDetailDTO.Display.ScreenSize;
+            phone.Display.TouchScreen = phoneDetailDTO.Display.TouchScreen;
+            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == phoneDetailDTO.Display.Width && b.Height == phoneDetailDTO.Display.Height);
+            if (dispRes == null)
+                phone.DisplayResolution = new DisplayResolution {Height = phoneDetailDTO.Display.Height, Width = phoneDetailDTO.Display.Width};
+            else phone.DisplayResolution = dispRes;
+            //}
+
             db.Entry(phone).State = EntityState.Modified;
 
             try
@@ -224,6 +245,19 @@ namespace PhoneCat.Controllers
             }
             phone.Availability = availabilityList;
             //}
+
+            //display{
+            phone.Display = new Display
+            {
+                ScreenSize = phoneDetailDTO.Display.ScreenSize,
+                TouchScreen = phoneDetailDTO.Display.TouchScreen
+            };
+            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == phoneDetailDTO.Display.Width && b.Height == phoneDetailDTO.Display.Height);
+            if (dispRes == null)
+                phone.DisplayResolution = new DisplayResolution { Height = phoneDetailDTO.Display.Height, Width = phoneDetailDTO.Display.Width };
+            else phone.DisplayResolution = dispRes;
+            //}
+
             db.Phones.Add(phone);
             await db.SaveChangesAsync();
 

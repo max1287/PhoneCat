@@ -5,5 +5,6 @@ angular.module('core', [
     'core.androidOs',
     'core.androidUi',
     'core.batteryType',
-    'core.availability'
+    'core.availability',
+    'core.displayResolution'
 ]);

@@ -4,14 +4,16 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability',
-            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
                 self.androidUi = AndroidUi.query();
                 self.availability = Availability.query();
                 self.batteryTypes = BatteryType.query();
+                self.displayResolutions = DisplayResolution.query();
+                self.selectedResolution = "";
                 self.addAvailabilityItem = "";
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
@@ -23,6 +25,9 @@ angular.
                         self.phone.description = self.editDescription;
                         self.phone.snippet = self.editSnippet;
                         self.phone.age = self.editAge;
+                        var resolutions = self.selectedResolution.split('x');
+                        self.phone.display.height = resolutions[0];
+                        self.phone.display.width = resolutions[1];
                         Phone.save(self.phone, function () {
                             $location.path('/phones')
                         });
@@ -34,6 +39,9 @@ angular.
                         self.phone.description = self.editDescription;
                         self.phone.snippet = self.editSnippet;
                         self.phone.age = self.editAge;
+                        var resolutions = self.selectedResolution.split('x');
+                        self.phone.display.height = resolutions[0];
+                        self.phone.display.width = resolutions[1];
                         Phone.update({ phoneId: self.phone.id }, self.phone, function () {
                             $location.path('/phones/' + self.phone.id)
                         });
@@ -43,6 +51,7 @@ angular.
                         self.editDescription = self.phone.description;
                         self.editSnippet = self.phone.snippet;
                         self.editAge = self.phone.age;
+                        self.selectedResolution = self.phone.display.height + 'x' + self.phone.display.width;
                     });
                 }
 

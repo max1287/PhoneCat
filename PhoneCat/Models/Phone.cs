@@ -24,5 +24,7 @@ namespace PhoneCat.Models
         public Battery Battery { get; set; }
         public BatteryType BatteryType { get; set; }
         public virtual ICollection<Availability> Availability { get; set; }
+        public Display Display { get; set; }
+        public DisplayResolution DisplayResolution { get; set; }
     }
 }
