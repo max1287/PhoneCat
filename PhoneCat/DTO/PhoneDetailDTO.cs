@@ -10,7 +10,7 @@ namespace PhoneCat.DTO
     public class PhoneDetailDTO
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Name field can not be empty!")]
         public string Name { get; set; }
         public string Description { get; set; }
         public int Age { get; set; }

@@ -55,6 +55,13 @@ angular.
                     }
                     Phone.save(self.phone, function () {
                         $location.path('/phones')
+                    },
+                    function (response) {
+                        self.errors = response.data;
+                        /*
+                        if (self.errors['modelState']['phoneDetailDTO.Name']) {
+                            $('#phoneName').addClass('has-error');
+                        }*/
                     });
                 }
 
@@ -64,6 +71,13 @@ angular.
                     self.phone.display.width = resolutions[1];
                     Phone.update({ phoneId: self.phone.id }, self.phone, function () {
                         $location.path('/phones/' + self.phone.id)
+                    },
+                    function (response) {
+                        self.errors = response.data;
+                        /*
+                        if (self.errors['modelState']['phoneDetailDTO.Name']) {
+                            $('#phoneName').addClass('has-error');
+                        }*/
                     });
                 }
 
