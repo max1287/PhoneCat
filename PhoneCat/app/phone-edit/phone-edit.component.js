@@ -4,8 +4,8 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution', 'CameraFeatures',
-            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution, CameraFeatures) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth','Wifi',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
@@ -14,9 +14,12 @@ angular.
                 self.batteryTypes = BatteryType.query();
                 self.displayResolutions = DisplayResolution.query();
                 self.cameraFeatures = CameraFeatures.query();
+                self.bluetooth = Bluetooth.query();
+                self.wifi = Wifi.query();
                 self.selectedResolution = "";
                 self.availabilityItem = "";
                 self.cameraFeatureItem = "";
+                self.wifiItem = "";
 
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
@@ -28,7 +31,10 @@ angular.
                     self.phone.display = new Object();
                     self.phone.storage = new Object();
                     self.phone.sizeAndWeight = new Object();
+                    self.phone.camera = new Object();
                     self.phone.cameraFeatures = [];
+                    self.phone.connectivity = new Object();
+                    self.phone.connectivity.wifi = [];
                 }
                 else {//update
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
@@ -38,7 +44,7 @@ angular.
 
                 self.createChanges = function createChanges() {
                     var resolutions = self.selectedResolution.split('x');
-                    if (resolutions.count > 0) {
+                    if (resolutions.length > 0) {
                         self.phone.display.height = resolutions[0];
                         self.phone.display.width = resolutions[1];
                     }
@@ -101,6 +107,20 @@ angular.
                     var index = self.phone.cameraFeatures.indexOf(item);
                     if (index >= 0)
                         self.phone.cameraFeatures.splice(index, 1);
+                }
+                
+                self.deleteWifiItem = function deleteWifiItem(item) {
+                    var index = self.phone.connectivity.wifi.indexOf(item);
+                    if (index >= 0)
+                        self.phone.connectivity.wifi.splice(index, 1);
+                }
+
+                self.addWifiItem = function addWifiItem() {
+                    if (self.wifiItem != "") {
+                        if (self.phone.connectivity.wifi.indexOf(self.wifiItem) < 0)
+                            self.phone.connectivity.wifi.push(self.wifiItem);
+                        self.wifiItem = "";
+                    }
                 }
 
                 self.deleteImage = function deleteImage(image) {

@@ -28,5 +28,8 @@ namespace PhoneCat.Models
         public DisplayResolution DisplayResolution { get; set; }
         public Camera Camera { get; set; }
         public virtual ICollection<CameraFeatures> CameraFeatures { get; set; }
+        public Connectivity Connectivity { get; set; }
+        public Bluetooth Bluetooth { get; set; }
+        public virtual ICollection<Wifi> Wifi { get; set; }
     }
 }

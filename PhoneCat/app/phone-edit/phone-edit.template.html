@@ -117,18 +117,55 @@
     </li>
     <li>
         <span>Connectivity</span>
-        <dl>
-            <dt>Network Support</dt>
-            <dd>{{$ctrl.phone.connectivity.cell}}</dd>
-            <dt>WiFi</dt>
-            <dd>{{$ctrl.phone.connectivity.wifi}}</dd>
-            <dt>Bluetooth</dt>
-            <dd>{{$ctrl.phone.connectivity.bluetooth}}</dd>
-            <dt>Infrared</dt>
-            <dd>{{$ctrl.phone.connectivity.infrared}}</dd>
-            <dt>GPS</dt>
-            <dd>{{$ctrl.phone.connectivity.gps}}</dd>
-        </dl>
+        <table>
+            <tr><th>Network Support</th></tr>
+            <tr><td><textarea class="form-control" ng-model="$ctrl.phone.connectivity.cell" /></td></tr>
+            <tr><th>Bluetooth</th></tr>
+            <tr>
+                <td>
+                    <select class="form-control" ng-model="$ctrl.phone.connectivity.bluetooth">
+                        <option value="{{item}}" ng-repeat="item in $ctrl.bluetooth">{{item}}</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Infrared</th>
+                <td>
+                    <input type="checkbox" class="form-control" ng-model="$ctrl.phone.connectivity.infrared" />
+                </td>
+            </tr>
+            <tr>
+                <th>GPS</th>
+                <td>
+                    <input type="checkbox" class="form-control" ng-model="$ctrl.phone.connectivity.gps" />
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr><th>Wi-Fi</th></tr>
+            <tr ng-repeat="wifi in $ctrl.phone.connectivity.wifi">
+                <td>
+                    {{wifi}}
+                </td>
+                <td>
+                    <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteWifiItem(wifi)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" ng-model="$ctrl.wifiItem">
+                        <option value="{{item}}" ng-repeat="item in $ctrl.wifi">{{item}}</option>
+                    </select>
+                </td>
+                <td>
+                    <button ng-click="$ctrl.addWifiItem()">Add</button>
+                </td>
+            </tr>
+        </table>
     </li>
     <li>
         <span>Android</span>
@@ -178,7 +215,7 @@
     </li>
     <li>
         <span>Display</span>
-        <table>
+        <table class="table-condensed">
             <tbody>
                 <tr><th>Screen size</th></tr>
                 <tr>
@@ -193,11 +230,13 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <th>Touch Screen:</th>
-                    <td><input type="checkbox" class="form-control" ng-model="$ctrl.phone.display.touchScreen" /></td>
-                </tr>
             </tbody>
+        </table>
+        <table>
+            <tr>
+                <th>Touch Screen:</th>
+                <td><input type="checkbox" class="form-control" ng-model="$ctrl.phone.display.touchScreen" /></td>
+            </tr>
         </table>
     </li>
     <li>

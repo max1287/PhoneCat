@@ -9,5 +9,7 @@ angular.module('phoneEdit', [
     'core.availability',
     'ngFileUpload',
     'core.displayResolution',
-    'core.cameraFeatures'
+    'core.cameraFeatures',
+    'core.bluetooth',
+    'core.wifi'
 ]);

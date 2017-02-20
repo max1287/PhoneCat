@@ -62,7 +62,7 @@ namespace PhoneCat.Controllers
                     Type = p.BatteryType.Type,
                     TypeName = p.BatteryType.BatteryTypeName
                 },
-                Availability = p.Availability.Select(a=>a.Name).ToList(),
+                Availability = p.Availability.Select(a => a.Name).ToList(),
                 Display = new DisplayDTO()
                 {
                     ScreenSize = p.Display.ScreenSize,
@@ -72,7 +72,15 @@ namespace PhoneCat.Controllers
                     Name = p.DisplayResolution.Name
                 },
                 Camera = p.Camera,
-                CameraFeatures = p.CameraFeatures.Select(f=>f.Name).ToList()
+                CameraFeatures = p.CameraFeatures.Select(f => f.Name).ToList(),
+                Connectivity = new ConnectivityDTO()
+                {
+                    Gps = p.Connectivity.Gps,
+                    Infrared = p.Connectivity.Infrared,
+                    Cell = p.Connectivity.Cell,
+                    Bluetooth = p.Bluetooth.Version,
+                    Wifi = p.Wifi.Select(w => w.Name).ToList()
+                }
             }).SingleOrDefaultAsync(p => p.Id == id);
             
 
@@ -194,6 +202,33 @@ namespace PhoneCat.Controllers
             phone.CameraFeatures = featuresList;
             //}
 
+            //connectivity{
+            phone.Connectivity.Gps = phoneDetailDTO.Connectivity.Gps;
+            phone.Connectivity.Infrared = phoneDetailDTO.Connectivity.Infrared;
+            phone.Connectivity.Cell = phoneDetailDTO.Connectivity.Cell;
+            var bluetooth = db.Blueteeth.SingleOrDefault(b => b.Version == phoneDetailDTO.Connectivity.Bluetooth);
+            if (bluetooth == null)
+                phone.Bluetooth = new Bluetooth { Version = phoneDetailDTO.Connectivity.Bluetooth };
+            else phone.Bluetooth = bluetooth;
+
+            List<Wifi> wifiList = phone.Wifi.ToList();
+            for (int i = 0; i < phoneDetailDTO.Connectivity.Wifi.Count; i++)
+            {
+                String s = phoneDetailDTO.Connectivity.Wifi.ElementAt(i);
+                Wifi wifi = await db.Wifis.SingleOrDefaultAsync(w => w.Name == s);
+                if (wifiList.Contains(wifi) == false) wifiList.Add(wifi);
+            }
+            for (int i = 0; i < wifiList.Count; i++)
+            {
+                if (phoneDetailDTO.Connectivity.Wifi.IndexOf(wifiList[i].Name) < 0)
+                {
+                    wifiList.Remove(wifiList[i]);
+                    i--;
+                }
+            }
+            phone.Wifi = wifiList;
+            //}
+
             db.Entry(phone).State = EntityState.Modified;
 
             try
@@ -298,6 +333,28 @@ namespace PhoneCat.Controllers
                 featuresList.Add(feature);
             }
             phone.CameraFeatures = featuresList;
+            //}
+
+            //connectivity{
+            phone.Connectivity = new Connectivity
+            {
+                Gps = phoneDetailDTO.Connectivity.Gps,
+                Infrared = phoneDetailDTO.Connectivity.Infrared,
+                Cell = phoneDetailDTO.Connectivity.Cell,
+            };
+            var bluetooth = db.Blueteeth.SingleOrDefault(b => b.Version == phoneDetailDTO.Connectivity.Bluetooth);
+            if (bluetooth == null)
+                phone.Bluetooth = new Bluetooth { Version = phoneDetailDTO.Connectivity.Bluetooth };
+            else phone.Bluetooth = bluetooth;
+
+            List<Wifi> wifiList = new List<Wifi>();
+            for (int i = 0; i < phoneDetailDTO.Connectivity.Wifi.Count; i++)
+            {
+                String s = phoneDetailDTO.Connectivity.Wifi.ElementAt(i);
+                Wifi wifi = await db.Wifis.SingleOrDefaultAsync(w => w.Name == s);
+                wifiList.Add(wifi);
+            }
+            phone.Wifi = wifiList;
             //}
 
             db.Phones.Add(phone);

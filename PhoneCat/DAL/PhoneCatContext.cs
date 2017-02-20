@@ -18,6 +18,8 @@ namespace PhoneCat.DAL
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<DisplayResolution> DisplayResolutions { get; set; }
         public DbSet<CameraFeatures> CameraFeatures { get; set; }
+        public DbSet<Bluetooth> Blueteeth { get; set; }
+        public DbSet<Wifi> Wifis { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Phone>()
@@ -30,6 +32,11 @@ namespace PhoneCat.DAL
                 .Map(t => t.MapLeftKey("PhoneId")
                 .MapRightKey("FeaturesId")
                 .ToTable("PhoneCameraFeatures"));
+            modelBuilder.Entity<Phone>()
+                .HasMany(p => p.Wifi).WithMany(i => i.Phones)
+                .Map(t => t.MapLeftKey("PhoneId")
+                .MapRightKey("WifiId")
+                .ToTable("PhoneWifi"));
         }
     }
 }
