@@ -37,6 +37,7 @@ namespace PhoneCat.Migrations
                     Battery = new Battery {StandbyTime = 1000, TalkTime=5, Capacity = 1180},
                     Display = new Display {ScreenSize = 5.1, TouchScreen = true },
                     Camera = new Camera {Primary = 5.0 },
+                    Hardware = new Hardware {Accelerometer = true, AudioJack = 3.5, FmRadio = true, PhysicalKeyboard = false },
                     SizeAndWeight = new SizeAndWeight {Height = 10.0, Width = 131.1, Depth = 10.12, Weight = 12.1 },
                     Connectivity = new Connectivity {Gps = true, Infrared = false, Cell = "Quad-band GSM: 850, 900, 1800, 1900\r\nTri-band HSPA: 900, 2100, 1700\r\nHSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)"},
                     AdditionalFeatures = "AdditionalFeatures 1",
@@ -47,6 +48,7 @@ namespace PhoneCat.Migrations
                     Battery = new Battery {StandbyTime = 1000, TalkTime=5, Capacity = 245},
                     Display = new Display {ScreenSize = 5.1, TouchScreen = true },
                     Camera = new Camera {Primary = 9.1 },
+                    Hardware = new Hardware {Accelerometer = true, AudioJack = 3.5, FmRadio = true, PhysicalKeyboard = false },
                     SizeAndWeight = new SizeAndWeight {Height = 10.0, Width = 131.1, Depth = 10.12, Weight = 12.1 },
                     Connectivity = new Connectivity {Gps = true, Infrared = false, Cell = "Quad-band GSM: 850, 900, 1800, 1900\r\nTri-band HSPA: 900, 2100, 1700\r\nHSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)"},
                     AdditionalFeatures = "AdditionalFeatures 2",
@@ -57,6 +59,7 @@ namespace PhoneCat.Migrations
                     Battery = new Battery {StandbyTime = 452, TalkTime=5, Capacity = 24521},
                     Display = new Display {ScreenSize = 5.1, TouchScreen = true },
                     Camera = new Camera {Primary = 10.0 },
+                    Hardware = new Hardware {Accelerometer = true, AudioJack = 3.5, FmRadio = true, PhysicalKeyboard = false },
                     SizeAndWeight = new SizeAndWeight {Height = 10.0, Width = 131.1, Depth = 10.12, Weight = 12.1 },
                     Connectivity = new Connectivity {Gps = true, Infrared = false, Cell = "Quad-band GSM: 850, 900, 1800, 1900\r\nTri-band HSPA: 900, 2100, 1700\r\nHSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)"},
                     AdditionalFeatures = "AdditionalFeatures 3",
@@ -67,6 +70,7 @@ namespace PhoneCat.Migrations
                     Battery = new Battery {StandbyTime = 1313, TalkTime=5, Capacity = 21452},
                     Display = new Display {ScreenSize = 5.1, TouchScreen = true },
                     Camera = new Camera {Primary = 5.0 },
+                    Hardware = new Hardware {Accelerometer = true, AudioJack = 3.5, FmRadio = true, PhysicalKeyboard = false },
                     SizeAndWeight = new SizeAndWeight {Height = 10.0, Width = 131.1, Depth = 10.12, Weight = 12.1 },
                     Connectivity = new Connectivity {Gps = true, Infrared = false, Cell = "Quad-band GSM: 850, 900, 1800, 1900\r\nTri-band HSPA: 900, 2100, 1700\r\nHSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)"},
                     AdditionalFeatures = "AdditionalFeatures 4",
@@ -77,6 +81,7 @@ namespace PhoneCat.Migrations
                     Battery = new Battery {StandbyTime = 2632, TalkTime=5, Capacity = 2145},
                     Display = new Display {ScreenSize = 5.1, TouchScreen = true },
                     Camera = new Camera {Primary = 3.0 },
+                    Hardware = new Hardware {Accelerometer = true, AudioJack = 3.5, FmRadio = true, PhysicalKeyboard = false },
                     SizeAndWeight = new SizeAndWeight {Height = 10.0, Width = 131.1, Depth = 10.12, Weight = 12.1 },
                     Connectivity = new Connectivity {Gps = true, Infrared = false, Cell = "Quad-band GSM: 850, 900, 1800, 1900\r\nTri-band HSPA: 900, 2100, 1700\r\nHSPA type: HSDPA (7.2Mbps) HSUPA (5.76Mbps)"},
                     AdditionalFeatures = "AdditionalFeatures 5",
@@ -290,6 +295,39 @@ namespace PhoneCat.Migrations
             AddOrUpdatePhoneWifi(context, "MOTOROLA XOOM\u2122", 1);
             AddOrUpdatePhoneWifi(context, "MOTOROLA XOOM\u2122", 3);
             //}
+
+            //hardware{
+            var processors = new List<Processor>
+            {
+                new Processor {Name = "1 GHz Dual Core" },
+                new Processor {Name = "1GHz Cortex A8 (Hummingbird) processor" },
+                new Processor {Name = "2nd Generation 1GHz Qualcomm Snapdragon MSM8255" },
+                new Processor {Name = "1.2 GHz TI OMAP" },
+                new Processor {Name = "" }
+            };
+            processors.ForEach(p => context.Processors.AddOrUpdate(s => s.Name, p));
+            context.SaveChanges();
+            AddOrUpdatePhoneProcessor(context, "LG-Axis", 1);
+            AddOrUpdatePhoneProcessor(context, "Nexus S", 2);
+            AddOrUpdatePhoneProcessor(context, "Samsung Galaxy Tab\u2122", 3);
+            AddOrUpdatePhoneProcessor(context, "MOTOROLA ATRIX\u2122 4G", 5);
+            AddOrUpdatePhoneProcessor(context, "MOTOROLA XOOM\u2122", 4);
+            context.SaveChanges();
+            var usbs = new List<Usb>
+            {
+                new Usb {Version = "USB 1.1" },
+                new Usb {Version = "USB 2.0" },
+                new Usb {Version = "USB 3.0" }
+            };
+            usbs.ForEach(u => context.Usb.AddOrUpdate(s => s.Version, u));
+            context.SaveChanges();
+            AddOrUpdatePhoneUsb(context, "LG-Axis", 1);
+            AddOrUpdatePhoneUsb(context, "Nexus S", 2);
+            AddOrUpdatePhoneUsb(context, "Samsung Galaxy Tab\u2122", 2);
+            AddOrUpdatePhoneUsb(context, "MOTOROLA ATRIX\u2122 4G", 2);
+            AddOrUpdatePhoneUsb(context, "MOTOROLA XOOM\u2122", 3);
+            context.SaveChanges();
+            //}
         }
 
         void AddOrUpdatePhoneImage(PhoneCatContext context, string phoneName, int imageId)
@@ -352,6 +390,18 @@ namespace PhoneCat.Migrations
             var wifi = phn.Wifi.SingleOrDefault(f => f.Id == id);
             if (wifi == null)
                 phn.Wifi.Add(context.Wifis.Single(i => i.Id == id));
+        }
+        void AddOrUpdatePhoneProcessor(PhoneCatContext context, string phoneName, int id)
+        {
+            var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            var cpu = context.Processors.FirstOrDefault(d => d.Id == id);
+            phn.Processor = cpu;
+        }
+        void AddOrUpdatePhoneUsb(PhoneCatContext context, string phoneName, int id)
+        {
+            var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            var usb = context.Usb.FirstOrDefault(d => d.Id == id);
+            phn.Usb = usb;
         }
     }
 }

@@ -4,8 +4,10 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth','Wifi',
-            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload',
+            'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth', 'Wifi', 'Processor','Usb',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload,
+                Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi, Processor, Usb) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
@@ -16,6 +18,8 @@ angular.
                 self.cameraFeatures = CameraFeatures.query();
                 self.bluetooth = Bluetooth.query();
                 self.wifi = Wifi.query();
+                self.processors = Processor.query();
+                self.usbs = Usb.query();
                 self.selectedResolution = "";
                 self.availabilityItem = "";
                 self.cameraFeatureItem = "";
@@ -35,6 +39,7 @@ angular.
                     self.phone.cameraFeatures = [];
                     self.phone.connectivity = new Object();
                     self.phone.connectivity.wifi = [];
+                    self.phone.hardware = new Object();
                 }
                 else {//update
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
@@ -44,7 +49,7 @@ angular.
 
                 self.createChanges = function createChanges() {
                     var resolutions = self.selectedResolution.split('x');
-                    if (resolutions.length > 0) {
+                    if (resolutions.length == 2) {
                         self.phone.display.height = resolutions[0];
                         self.phone.display.width = resolutions[1];
                     }

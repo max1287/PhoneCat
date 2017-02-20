@@ -241,18 +241,39 @@
     </li>
     <li>
         <span>Hardware</span>
-        <dl>
-            <dt>CPU</dt>
-            <dd>{{$ctrl.phone.hardware.cpu}}</dd>
-            <dt>USB</dt>
-            <dd>{{$ctrl.phone.hardware.usb}}</dd>
-            <dt>Audio / headphone jack</dt>
-            <dd>{{$ctrl.phone.hardware.audioJack}}</dd>
-            <dt>FM Radio</dt>
-            <dd>{{$ctrl.phone.hardware.fmRadio}}</dd>
-            <dt>Accelerometer</dt>
-            <dd>{{$ctrl.phone.hardware.accelerometer}}</dd>
-        </dl>
+        <table>
+            <tr><th>CPU</th></tr>
+            <tr>
+                <td>
+                    <select class="form-control" ng-model="$ctrl.phone.hardware.processor">
+                        <option value="{{item}}" ng-repeat="item in $ctrl.processors">{{item}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr><th>USB</th></tr>
+            <tr>
+                <td>
+                    <select class="form-control" ng-model="$ctrl.phone.hardware.usb">
+                        <option value="{{item}}" ng-repeat="item in $ctrl.usbs">{{item}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr><th>Audio / headphone jack</th></tr>
+            <tr>
+                <td><input class="form-control" ng-model="$ctrl.phone.hardware.audioJack" /></td>
+                <td>mm.</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>FM Radio</th>
+                <td><input type="checkbox" class="form-control" ng-model="$ctrl.phone.hardware.fmRadio" /></td>
+            </tr>
+            <tr>
+                <th>Accelerometer</th>
+                <td><input type="checkbox" class="form-control" ng-model="$ctrl.phone.hardware.accelerometer" /></td>
+            </tr>            
+        </table>
     </li>
     <li>
         <span>Camera</span>

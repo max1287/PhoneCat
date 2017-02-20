@@ -7,5 +7,7 @@ angular.module('core', [
     'core.batteryType',
     'core.availability',
     'core.displayResolution',
-    'core.cameraFeatures'
+    'core.cameraFeatures',
+    'core.processor',
+    'core.usb'
 ]);

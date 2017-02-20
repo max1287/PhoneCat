@@ -18,7 +18,7 @@ angular.
 
 
             	self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
-                    self.mainImageUrl = "/api/image?imageUrl=" + self.phone.images[0];
+            	    self.mainImageUrl = "/api/image?imageUrl=" + (self.phone.images[0]==undefined?'default':self.phone.images[0]);
             	});
             }
     	]

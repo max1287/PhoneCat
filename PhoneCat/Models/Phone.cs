@@ -31,5 +31,8 @@ namespace PhoneCat.Models
         public Connectivity Connectivity { get; set; }
         public Bluetooth Bluetooth { get; set; }
         public virtual ICollection<Wifi> Wifi { get; set; }
+        public Hardware Hardware { get; set; }
+        public Processor Processor { get; set; }
+        public Usb Usb { get; set; }
     }
 }

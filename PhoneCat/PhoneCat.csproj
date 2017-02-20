@@ -176,12 +176,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PhonesController.cs" />
+    <Compile Include="Controllers\ProcessorController.cs" />
+    <Compile Include="Controllers\UsbController.cs" />
     <Compile Include="Controllers\WifiController.cs" />
     <Compile Include="DAL\PhoneCatContext.cs" />
     <Compile Include="DTO\AndroidDTO.cs" />
     <Compile Include="DTO\BatteryDTO.cs" />
     <Compile Include="DTO\ConnectivityDTO.cs" />
     <Compile Include="DTO\DisplayDTO.cs" />
+    <Compile Include="DTO\HardwareDTO.cs" />
     <Compile Include="DTO\PhoneDetailDTO.cs" />
     <Compile Include="DTO\PhoneDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,6 +270,10 @@
     <Compile Include="Migrations\201702201144581_addConnectivity.Designer.cs">
       <DependentUpon>201702201144581_addConnectivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702201347586_addHardware.cs" />
+    <Compile Include="Migrations\201702201347586_addHardware.Designer.cs">
+      <DependentUpon>201702201347586_addHardware.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Android.cs" />
     <Compile Include="Models\AndroidOs.cs" />
@@ -280,14 +287,21 @@
     <Compile Include="Models\Connectivity.cs" />
     <Compile Include="Models\Display.cs" />
     <Compile Include="Models\DisplayResolution.cs" />
+    <Compile Include="Models\Hardware.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Phone.cs" />
+    <Compile Include="Models\Processor.cs" />
     <Compile Include="Models\SizeAndWeight.cs" />
     <Compile Include="Models\Storage.cs" />
+    <Compile Include="Models\Usb.cs" />
     <Compile Include="Models\Wifi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\core\usb\usb.module.js" />
+    <Content Include="app\core\usb\usb.service.js" />
+    <Content Include="app\core\processor\processor.module.js" />
+    <Content Include="app\core\processor\processor.service.js" />
     <Content Include="app\core\wifi\wifi.module.js" />
     <Content Include="app\core\wifi\wifi.service.js" />
     <Content Include="app\core\bluetooth\bluetooth.module.js" />
@@ -532,6 +546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702201144581_addConnectivity.resx">
       <DependentUpon>201702201144581_addConnectivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702201347586_addHardware.resx">
+      <DependentUpon>201702201347586_addHardware.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

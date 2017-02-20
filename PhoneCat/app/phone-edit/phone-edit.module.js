@@ -11,5 +11,7 @@ angular.module('phoneEdit', [
     'core.displayResolution',
     'core.cameraFeatures',
     'core.bluetooth',
-    'core.wifi'
+    'core.wifi',
+    'core.processor',
+    'core.usb'
 ]);

@@ -80,6 +80,15 @@ namespace PhoneCat.Controllers
                     Cell = p.Connectivity.Cell,
                     Bluetooth = p.Bluetooth.Version,
                     Wifi = p.Wifi.Select(w => w.Name).ToList()
+                },
+                Hardware = new HardwareDTO()
+                {
+                    Accelerometer = p.Hardware.Accelerometer,
+                    AudioJack = p.Hardware.AudioJack,
+                    FmRadio = p.Hardware.FmRadio,
+                    PhysicalKeyboard = p.Hardware.PhysicalKeyboard,
+                    Processor = p.Processor.Name,
+                    Usb = p.Usb.Version
                 }
             }).SingleOrDefaultAsync(p => p.Id == id);
             
@@ -229,6 +238,21 @@ namespace PhoneCat.Controllers
             phone.Wifi = wifiList;
             //}
 
+            //hardware{
+            phone.Hardware.Accelerometer = phoneDetailDTO.Hardware.Accelerometer;
+            phone.Hardware.AudioJack = phoneDetailDTO.Hardware.AudioJack;
+            phone.Hardware.FmRadio = phoneDetailDTO.Hardware.FmRadio;
+            phone.Hardware.PhysicalKeyboard = phoneDetailDTO.Hardware.PhysicalKeyboard;
+            var cpu = db.Processors.SingleOrDefault(c => c.Name == phoneDetailDTO.Hardware.Processor);
+            if (cpu == null)
+                phone.Processor = new Processor { Name = phoneDetailDTO.Hardware.Processor };
+            else phone.Processor = cpu;
+            var usb = db.Usb.FirstOrDefault(u => u.Version == phoneDetailDTO.Hardware.Usb);
+            if (usb == null)
+                phone.Usb = new Usb { Version = phoneDetailDTO.Hardware.Usb };
+            else phone.Usb = usb;
+            //}
+
             db.Entry(phone).State = EntityState.Modified;
 
             try
@@ -355,6 +379,24 @@ namespace PhoneCat.Controllers
                 wifiList.Add(wifi);
             }
             phone.Wifi = wifiList;
+            //}
+
+            //hardware{
+            phone.Hardware = new Hardware()
+            {
+                Accelerometer = phoneDetailDTO.Hardware.Accelerometer,
+                AudioJack = phoneDetailDTO.Hardware.AudioJack,
+                FmRadio = phoneDetailDTO.Hardware.FmRadio,
+                PhysicalKeyboard = phoneDetailDTO.Hardware.PhysicalKeyboard
+            };
+            var cpu = db.Processors.SingleOrDefault(c => c.Name == phoneDetailDTO.Hardware.Processor);
+            if (cpu == null)
+                phone.Processor = new Processor { Name = phoneDetailDTO.Hardware.Processor };
+            else phone.Processor = cpu;
+            var usb = db.Usb.FirstOrDefault(u => u.Version == phoneDetailDTO.Hardware.Usb);
+            if (usb == null)
+                phone.Usb = new Usb { Version = phoneDetailDTO.Hardware.Usb };
+            else phone.Usb = usb;
             //}
 
             db.Phones.Add(phone);

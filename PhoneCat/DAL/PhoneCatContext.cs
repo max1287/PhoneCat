@@ -20,6 +20,8 @@ namespace PhoneCat.DAL
         public DbSet<CameraFeatures> CameraFeatures { get; set; }
         public DbSet<Bluetooth> Blueteeth { get; set; }
         public DbSet<Wifi> Wifis { get; set; }
+        public DbSet<Processor> Processors { get; set; }
+        public DbSet<Usb> Usb { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Phone>()

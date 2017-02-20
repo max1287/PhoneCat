@@ -30,7 +30,7 @@
                  <li ng-repeat="phone in $ctrl.phones | filter: $ctrl.query | orderBy: ''+$ctrl.desc+$ctrl.orderProp" 
                      class="thumbnail phone-list-item">
                      <a href="#!/phones/{{phone.id}}" class="thumb">
-                         <img ng-src="/api/image?imageUrl={{phone.imageUrl}}" alt = "{{phone.name}}" />
+                         <img ng-src="/api/image?imageUrl={{phone.imageUrl==undefined?'default':phone.imageUrl}}" alt = "{{phone.name}}" />
                      </a>
                      <a href="#!/phones/{{phone.id}}">{{phone.name}}</a>
                      <p>{{phone.snippet}}</p>

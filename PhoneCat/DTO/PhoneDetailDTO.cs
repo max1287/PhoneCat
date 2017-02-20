@@ -27,5 +27,6 @@ namespace PhoneCat.DTO
         public Camera Camera { get; set; }
         public List<string> CameraFeatures { get; set; }
         public ConnectivityDTO Connectivity { get; set; }
+        public HardwareDTO Hardware { get; set; }
     }
 }
