@@ -137,6 +137,12 @@ angular.
                 self.cancelChanges = function cancelChanges() {
                     $location.path('/phones/' + (self.createOrUpdate ? "" : self.phone.id))
                 }
+
+                self.doSubmit = function doSubmit() {
+                    if (self.createOrUpdate)
+                        self.createChanges();
+                    else self.saveChanges();
+                };
             }
         ]
     });
