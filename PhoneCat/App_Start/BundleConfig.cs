@@ -36,6 +36,8 @@ namespace PhoneCat
                         "~/app/core/availability/availability.service.js",
                         "~/app/core/display-resolution/display-resolution.module.js",
                         "~/app/core/display-resolution/display-resolution.service.js",
+                        "~/app/core/camera-features/camera-features.module.js",
+                        "~/app/core/camera-features/camera-features.service.js",
                         "~/app/phone-list/phone-list.module.js",
                         "~/app/phone-list/phone-list.component.js",
                         "~/app/phone-detail/phone-detail.module.js",

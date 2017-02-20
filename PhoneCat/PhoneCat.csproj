@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AndroidUiController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BatteryTypeController.cs" />
+    <Compile Include="Controllers\CameraFeaturesController.cs" />
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -255,6 +256,10 @@
     <Compile Include="Migrations\201702171141470_display1.Designer.cs">
       <DependentUpon>201702171141470_display1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702200851028_camera.cs" />
+    <Compile Include="Migrations\201702200851028_camera.Designer.cs">
+      <DependentUpon>201702200851028_camera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Android.cs" />
     <Compile Include="Models\AndroidOs.cs" />
@@ -262,6 +267,8 @@
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Battery.cs" />
     <Compile Include="Models\BatteryType.cs" />
+    <Compile Include="Models\Camera.cs" />
+    <Compile Include="Models\CameraFeatures.cs" />
     <Compile Include="Models\Display.cs" />
     <Compile Include="Models\DisplayResolution.cs" />
     <Compile Include="Models\Image.cs" />
@@ -271,6 +278,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\core\camera-features\camera-features.module.js" />
+    <Content Include="app\core\camera-features\camera-features.service.js" />
     <Content Include="app\core\display-resolution\display-resolution.module.js" />
     <Content Include="app\core\display-resolution\display-resolution.service.js" />
     <Content Include="app\core\availability\availability.module.js" />
@@ -503,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702171141470_display1.resx">
       <DependentUpon>201702171141470_display1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702200851028_camera.resx">
+      <DependentUpon>201702200851028_camera.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

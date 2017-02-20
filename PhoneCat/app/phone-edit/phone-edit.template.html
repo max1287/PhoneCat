@@ -217,12 +217,38 @@
     </li>
     <li>
         <span>Camera</span>
-        <dl>
-            <dt>Primary</dt>
-            <dd>{{$ctrl.phone.camera.primary}}</dd>
-            <dt>Features</dt>
-            <dd>{{$ctrl.phone.camera.features.join(', ')}}</dd>
-        </dl>
+        <table>
+            <tbody>
+                <tr><th>Primary</th></tr>
+                <tr>
+                    <td><input class="form-control" ng-model="$ctrl.phone.camera.primary" /></td>
+                    <td>megapixels</td>
+                </tr>
+                <tr><th>Features</th></tr>
+                <tr ng-repeat="feature in $ctrl.phone.cameraFeatures">
+                    <td>
+                        {{feature}}
+                    </td>
+                    <td>
+                        <button class="btn btn-default btn-xs" ng-click="$ctrl.deleteFeatureItem(feature)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <select class="form-control" ng-model="$ctrl.cameraFeatureItem">
+                            <option value="{{item}}" ng-repeat="item in $ctrl.cameraFeatures">{{item}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ng-click="$ctrl.addFeatureItem()">Add</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </li>
     <li>
         <span>Additional Features</span>

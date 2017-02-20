@@ -7,9 +7,6 @@ namespace PhoneCat.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.Phones", "Display_ScreenSize", c => c.Double(nullable: false));
-            AlterColumn("dbo.Phones", "Display_TouchScreen", c => c.Boolean(nullable: false));
-
             CreateTable(
                 "dbo.DisplayResolutions",
                 c => new

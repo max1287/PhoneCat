@@ -26,5 +26,7 @@ namespace PhoneCat.Models
         public virtual ICollection<Availability> Availability { get; set; }
         public Display Display { get; set; }
         public DisplayResolution DisplayResolution { get; set; }
+        public Camera Camera { get; set; }
+        public virtual ICollection<CameraFeatures> CameraFeatures { get; set; }
     }
 }

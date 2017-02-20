@@ -70,7 +70,9 @@ namespace PhoneCat.Controllers
                     Height = p.DisplayResolution.Height,
                     Width = p.DisplayResolution.Width,
                     Name = p.DisplayResolution.Name
-                }
+                },
+                Camera = p.Camera,
+                CameraFeatures = p.CameraFeatures.Select(f=>f.Name).ToList()
             }).SingleOrDefaultAsync(p => p.Id == id);
             
 
@@ -172,6 +174,26 @@ namespace PhoneCat.Controllers
             else phone.DisplayResolution = dispRes;
             //}
 
+            //camera{
+            phone.Camera = phoneDetailDTO.Camera;
+            List<CameraFeatures> featuresList = phone.CameraFeatures.ToList();
+            for (int i = 0; i < phoneDetailDTO.CameraFeatures.Count; i++)
+            {
+                String s = phoneDetailDTO.CameraFeatures.ElementAt(i);
+                CameraFeatures feature = await db.CameraFeatures.SingleOrDefaultAsync(f => f.Name == s);
+                if (featuresList.Contains(feature) == false) featuresList.Add(feature);
+            }
+            for (int i = 0; i < featuresList.Count; i++)
+            {
+                if (phoneDetailDTO.CameraFeatures.IndexOf(featuresList[i].Name) < 0)
+                {
+                    featuresList.Remove(featuresList[i]);
+                    i--;
+                }
+            }
+            phone.CameraFeatures = featuresList;
+            //}
+
             db.Entry(phone).State = EntityState.Modified;
 
             try
@@ -264,6 +286,18 @@ namespace PhoneCat.Controllers
             if (dispRes == null)
                 phone.DisplayResolution = new DisplayResolution { Height = phoneDetailDTO.Display.Height, Width = phoneDetailDTO.Display.Width };
             else phone.DisplayResolution = dispRes;
+            //}
+
+            //camera{
+            phone.Camera = phoneDetailDTO.Camera;
+            List<CameraFeatures> featuresList = new List<CameraFeatures>();
+            for (int i = 0; i < phoneDetailDTO.CameraFeatures.Count; i++)
+            {
+                String s = phoneDetailDTO.CameraFeatures.ElementAt(i);
+                CameraFeatures feature = await db.CameraFeatures.SingleOrDefaultAsync(f => f.Name == s);
+                featuresList.Add(feature);
+            }
+            phone.CameraFeatures = featuresList;
             //}
 
             db.Phones.Add(phone);

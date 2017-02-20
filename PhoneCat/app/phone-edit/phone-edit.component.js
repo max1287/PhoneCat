@@ -4,8 +4,8 @@ angular.
     module('phoneEdit').
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
-        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution',
-            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution) {
+        controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload', 'Availability', 'DisplayResolution', 'CameraFeatures',
+            function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload, Availability, DisplayResolution, CameraFeatures) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
@@ -13,8 +13,10 @@ angular.
                 self.availability = Availability.query();
                 self.batteryTypes = BatteryType.query();
                 self.displayResolutions = DisplayResolution.query();
+                self.cameraFeatures = CameraFeatures.query();
                 self.selectedResolution = "";
-                self.addAvailabilityItem = "";
+                self.availabilityItem = "";
+                self.cameraFeatureItem = "";
 
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
@@ -26,6 +28,7 @@ angular.
                     self.phone.display = new Object();
                     self.phone.storage = new Object();
                     self.phone.sizeAndWeight = new Object();
+                    self.phone.cameraFeatures = [];
                 }
                 else {//update
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
@@ -73,7 +76,7 @@ angular.
                 }
 
                 self.addAvailabilityItem = function addAvailabilityItem() {
-                    if (self.addAvailabilityItem != "") {
+                    if (self.availabilityItem != "") {
                         if (self.phone.availability.indexOf(self.availabilityItem) < 0)
                             self.phone.availability.push(self.availabilityItem);
                         self.availabilityItem = "";
@@ -84,6 +87,20 @@ angular.
                     var index = self.phone.availability.indexOf(item);
                     if (index >= 0)
                         self.phone.availability.splice(index,1);
+                }
+
+                self.addFeatureItem = function addFeatureItem() {
+                    if (self.cameraFeatureItem != "") {
+                        if (self.phone.cameraFeatures.indexOf(self.cameraFeatureItem) < 0)
+                            self.phone.cameraFeatures.push(self.cameraFeatureItem);
+                        self.cameraFeatureItem = "";
+                    }
+                }
+
+                self.deleteFeatureItem = function deleteFeatureItem(item) {
+                    var index = self.phone.cameraFeatures.indexOf(item);
+                    if (index >= 0)
+                        self.phone.cameraFeatures.splice(index, 1);
                 }
 
                 self.deleteImage = function deleteImage(image) {

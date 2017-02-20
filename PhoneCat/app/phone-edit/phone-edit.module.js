@@ -8,5 +8,6 @@ angular.module('phoneEdit', [
     'core.batteryType',
     'core.availability',
     'ngFileUpload',
-    'core.displayResolution'
+    'core.displayResolution',
+    'core.cameraFeatures'
 ]);

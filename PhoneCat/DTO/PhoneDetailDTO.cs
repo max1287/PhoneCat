@@ -24,5 +24,7 @@ namespace PhoneCat.DTO
         public BatteryDTO Battery { get; set; }
         public List<string> Availability { get; set; }
         public DisplayDTO Display { get; set; }
+        public Camera Camera { get; set; }
+        public List<string> CameraFeatures { get; set; }
     }
 }

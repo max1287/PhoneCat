@@ -17,6 +17,7 @@ namespace PhoneCat.DAL
         public DbSet<BatteryType> BatteryTypes { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<DisplayResolution> DisplayResolutions { get; set; }
+        public DbSet<CameraFeatures> CameraFeatures { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Phone>()
@@ -24,6 +25,11 @@ namespace PhoneCat.DAL
                 .Map(t => t.MapLeftKey("PhoneId")
                     .MapRightKey("AvailabilityId")
                     .ToTable("PhoneAvailability"));
+            modelBuilder.Entity<Phone>()
+                .HasMany(p => p.CameraFeatures).WithMany(i => i.Phones)
+                .Map(t => t.MapLeftKey("PhoneId")
+                .MapRightKey("FeaturesId")
+                .ToTable("PhoneCameraFeatures"));
         }
     }
 }

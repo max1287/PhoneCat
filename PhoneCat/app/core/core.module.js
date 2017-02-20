@@ -6,5 +6,6 @@ angular.module('core', [
     'core.androidUi',
     'core.batteryType',
     'core.availability',
-    'core.displayResolution'
+    'core.displayResolution',
+    'core.cameraFeatures'
 ]);
