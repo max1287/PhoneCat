@@ -333,6 +333,7 @@ namespace PhoneCat.Migrations
         void AddOrUpdatePhoneImage(PhoneCatContext context, string phoneName, int imageId)
         {
             var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            if (phn.Images == null) phn.Images = new List<Image>();
             var img = phn.Images.SingleOrDefault(i => i.Id == imageId);
             if (img == null)
                 phn.Images.Add(context.Images.Single(i => i.Id == imageId));
@@ -357,6 +358,7 @@ namespace PhoneCat.Migrations
         void AddOrUpdatePhoneAvailability(PhoneCatContext context, string phoneName, int availability)
         {
             var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            if (phn.Availability == null) phn.Availability = new List<Availability>();
             var av = phn.Availability.SingleOrDefault(a => a.Id == availability);
             if (av == null)
                 phn.Availability.Add(context.Availabilities.Single(i => i.Id == availability));
@@ -372,6 +374,7 @@ namespace PhoneCat.Migrations
         void AddOrUpdatePhoneCameraFeatures(PhoneCatContext context, string phoneName, int feature)
         {
             var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            if (phn.CameraFeatures == null) phn.CameraFeatures = new List<CameraFeatures>();
             var feat = phn.CameraFeatures.SingleOrDefault(f => f.Id == feature);
             if (feat == null)
                 phn.CameraFeatures.Add(context.CameraFeatures.Single(i => i.Id == feature));
@@ -387,6 +390,7 @@ namespace PhoneCat.Migrations
         void AddOrUpdatePhoneWifi(PhoneCatContext context, string phoneName, int id)
         {
             var phn = context.Phones.SingleOrDefault(p => p.Name == phoneName);
+            if (phn.Wifi == null) phn.Wifi = new List<Wifi>();
             var wifi = phn.Wifi.SingleOrDefault(f => f.Id == id);
             if (wifi == null)
                 phn.Wifi.Add(context.Wifis.Single(i => i.Id == id));

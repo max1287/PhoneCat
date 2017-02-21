@@ -225,10 +225,6 @@
     <Compile Include="Migrations\201702161335577_sizeAndWeight.Designer.cs">
       <DependentUpon>201702161335577_sizeAndWeight.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702161344053_sizeAndWeight1.cs" />
-    <Compile Include="Migrations\201702161344053_sizeAndWeight1.Designer.cs">
-      <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201702161946381_additional-and-android.cs" />
     <Compile Include="Migrations\201702161946381_additional-and-android.Designer.cs">
       <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
@@ -515,9 +511,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161335577_sizeAndWeight.resx">
       <DependentUpon>201702161335577_sizeAndWeight.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702161344053_sizeAndWeight1.resx">
-      <DependentUpon>201702161344053_sizeAndWeight1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702161946381_additional-and-android.resx">
       <DependentUpon>201702161946381_additional-and-android.cs</DependentUpon>
