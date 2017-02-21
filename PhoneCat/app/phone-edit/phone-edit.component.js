@@ -5,7 +5,7 @@ angular.
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
         controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload',
-            'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth', 'Wifi', 'Processor','Usb',
+            'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth', 'Wifi', 'Processor', 'Usb',
             function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload,
                 Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi, Processor, Usb) {
                 var self = this;
@@ -103,7 +103,7 @@ angular.
                 self.deleteAvailabilityItem = function deleteAvailabilityItem(item) {
                     var index = self.phone.availability.indexOf(item);
                     if (index >= 0)
-                        self.phone.availability.splice(index,1);
+                        self.phone.availability.splice(index, 1);
                 }
 
                 self.addFeatureItem = function addFeatureItem() {
@@ -119,7 +119,7 @@ angular.
                     if (index >= 0)
                         self.phone.cameraFeatures.splice(index, 1);
                 }
-                
+
                 self.deleteWifiItem = function deleteWifiItem(item) {
                     var index = self.phone.connectivity.wifi.indexOf(item);
                     if (index >= 0)
