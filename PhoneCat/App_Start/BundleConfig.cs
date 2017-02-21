@@ -47,6 +47,8 @@ namespace PhoneCat
                         "~/app/core/usb/usb.module.js",
                         "~/app/core/usb/usb.service.js",
                         "~/app/core/checkmark/checkmark.filter.js",
+                        "~/app/core/image/image.module.js",
+                        "~/app/core/image/image.service.js",
                         "~/app/phone-list/phone-list.module.js",
                         "~/app/phone-list/phone-list.component.js",
                         "~/app/phone-detail/phone-detail.module.js",

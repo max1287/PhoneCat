@@ -27,6 +27,11 @@
             </li>
         </ul>
     </div>
+    <ul>
+        <li ng-repeat="i in $ctrl.startImages">{{i}}</li>
+    </ul>
+    
+
     <div id="errors"></div>
     <br />
     <button class="form-control-file" ngf-select="$ctrl.uploadPic($files)"

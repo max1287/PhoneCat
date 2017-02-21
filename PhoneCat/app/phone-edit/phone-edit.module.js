@@ -13,5 +13,6 @@ angular.module('phoneEdit', [
     'core.bluetooth',
     'core.wifi',
     'core.processor',
-    'core.usb'
+    'core.usb',
+    'core.image'
 ]);

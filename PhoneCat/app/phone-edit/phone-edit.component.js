@@ -5,9 +5,9 @@ angular.
     component('phoneEdit', {
         templateUrl: "app/phone-edit/phone-edit.template.html",
         controller: ['$location', 'Phone', '$routeParams', 'AndroidOs', 'AndroidUi', 'BatteryType', 'Upload',
-            'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth', 'Wifi', 'Processor', 'Usb',
+            'Availability', 'DisplayResolution', 'CameraFeatures', 'Bluetooth', 'Wifi', 'Processor', 'Usb', 'Image',
             function PhoneEditController($location, Phone, $routeParams, AndroidOs, AndroidUi, BatteryType, Upload,
-                Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi, Processor, Usb) {
+                Availability, DisplayResolution, CameraFeatures, Bluetooth, Wifi, Processor, Usb, Image) {
                 var self = this;
                 self.createOrUpdate = false;
                 self.androidOs = AndroidOs.query();
@@ -24,6 +24,7 @@ angular.
                 self.availabilityItem = "";
                 self.cameraFeatureItem = "";
                 self.wifiItem = "";
+                self.startImages = [];
 
                 if ($routeParams.phoneId == null) {//create
                     self.createOrUpdate = true;
@@ -44,8 +45,10 @@ angular.
                 else {//update
                     self.phone = Phone.get({ phoneId: $routeParams.phoneId }, function (phone) {
                         self.selectedResolution = self.phone.display.height + 'x' + self.phone.display.width;
+                        self.startImages = self.phone.images.slice();
                     });
                 }
+                
 
                 self.createChanges = function createChanges() {
                     Phone.save(self.phone, function () {
@@ -138,9 +141,18 @@ angular.
                     var index = self.phone.images.indexOf(image);
                     if (index >= 0)
                         self.phone.images.splice(index, 1);
+                    if (self.startImages.indexOf(image) < 0)
+                    {
+                        Image.delete({ imageUrl: image });
+                    }
                 }
 
                 self.cancelChanges = function cancelChanges() {
+                    for (var i = 0; i < self.phone.images.length; i++) {
+                        if (self.startImages.indexOf(self.phone.images[i]) < 0) {
+                            Image.delete({ imageUrl: self.phone.images[i] });
+                        }
+                    }
                     $location.path('/phones/' + (self.createOrUpdate ? "" : self.phone.id))
                 }
 
