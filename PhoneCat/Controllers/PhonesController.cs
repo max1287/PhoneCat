@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,15 +41,25 @@ namespace PhoneCat.Controllers
             var phone = await db.Phones.Select(p =>
             new PhoneDetailDTO()
             {
-                Id = p.Id,
+                Id = p.Id.ToString(),
                 Name = p.Name,
                 Description = p.Description,
                 Snippet = p.Snippet,
                 AdditionalFeatures = p.AdditionalFeatures,
-                Age = p.Age,
+                Age = p.Age.ToString(),
                 Images = p.Images.Select(g => g.ImageUrl).ToList(),
-                Storage = p.Storage,
-                SizeAndWeight = p.SizeAndWeight,
+                Storage = new StorageDTO()
+                {
+                    Flash = p.Storage.Flash.ToString(),
+                    Ram = p.Storage.Ram.ToString()
+                },
+                SizeAndWeight = new SizeAndWeightDTO()
+                {
+                    Height = p.SizeAndWeight.Height.ToString(),
+                    Width = p.SizeAndWeight.Width.ToString(),
+                    Depth = p.SizeAndWeight.Depth.ToString(),
+                    Weight = p.SizeAndWeight.Weight.ToString()
+                },
                 Android = new AndroidDTO()
                 {
                     Os = p.AndroidOs.Version,
@@ -56,22 +67,24 @@ namespace PhoneCat.Controllers
                 },
                 Battery = new BatteryDTO()
                 {
-                    StandbyTime = p.Battery.StandbyTime,
-                    TalkTime = p.Battery.TalkTime,
-                    Capacity = p.Battery.Capacity,
+                    StandbyTime = p.Battery.StandbyTime.ToString(),
+                    TalkTime = p.Battery.TalkTime.ToString(),
+                    Capacity = p.Battery.Capacity.ToString(),
                     Type = p.BatteryType.Type,
                     TypeName = p.BatteryType.BatteryTypeName
                 },
                 Availability = p.Availability.Select(a => a.Name).ToList(),
                 Display = new DisplayDTO()
                 {
-                    ScreenSize = p.Display.ScreenSize,
+                    ScreenSize = p.Display.ScreenSize.ToString(),
                     TouchScreen = p.Display.TouchScreen,
-                    Height = p.DisplayResolution.Height,
-                    Width = p.DisplayResolution.Width,
+                    Resolution = p.DisplayResolution.Height.ToString() + "x" +  p.DisplayResolution.Width.ToString(),
                     Name = p.DisplayResolution.Name
                 },
-                Camera = p.Camera,
+                Camera = new CameraDTO()
+                {
+                    Primary = p.Camera.Primary.ToString()
+                },
                 CameraFeatures = p.CameraFeatures.Select(f => f.Name).ToList(),
                 Connectivity = new ConnectivityDTO()
                 {
@@ -84,13 +97,13 @@ namespace PhoneCat.Controllers
                 Hardware = new HardwareDTO()
                 {
                     Accelerometer = p.Hardware.Accelerometer,
-                    AudioJack = p.Hardware.AudioJack,
+                    AudioJack = p.Hardware.AudioJack.ToString(),
                     FmRadio = p.Hardware.FmRadio,
                     PhysicalKeyboard = p.Hardware.PhysicalKeyboard,
                     Processor = p.Processor.Name,
                     Usb = p.Usb.Version
                 }
-            }).SingleOrDefaultAsync(p => p.Id == id);
+            }).SingleOrDefaultAsync(p => p.Id == id.ToString());
             
 
             if (phone == null)
@@ -110,7 +123,7 @@ namespace PhoneCat.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != phoneDetailDTO.Id)
+            if (id.ToString() != phoneDetailDTO.Id)
             {
                 return BadRequest();
             }
@@ -119,27 +132,31 @@ namespace PhoneCat.Controllers
             phone.Name = phoneDetailDTO.Name;
             phone.Snippet = phoneDetailDTO.Snippet;
             phone.Description = phoneDetailDTO.Description;
-            phone.Age = phoneDetailDTO.Age;
-            phone.Storage = phoneDetailDTO.Storage;
-            phone.SizeAndWeight = phoneDetailDTO.SizeAndWeight;
+            phone.Age = Convert.ToInt32(phoneDetailDTO.Age);
+            phone.Storage.Flash = Convert.ToInt32(phoneDetailDTO.Storage.Flash);
+            phone.Storage.Ram = Convert.ToInt32(phoneDetailDTO.Storage.Ram);
+            phone.SizeAndWeight.Height = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Height, CultureInfo.InvariantCulture);
+            phone.SizeAndWeight.Width = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Width, CultureInfo.InvariantCulture);
+            phone.SizeAndWeight.Depth = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Depth, CultureInfo.InvariantCulture);
+            phone.SizeAndWeight.Weight = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Weight, CultureInfo.InvariantCulture);
             phone.AdditionalFeatures = phoneDetailDTO.AdditionalFeatures;
             //battery{
-            phone.Battery.StandbyTime = phoneDetailDTO.Battery.StandbyTime;
-            phone.Battery.TalkTime = phoneDetailDTO.Battery.TalkTime;
-            phone.Battery.Capacity = phoneDetailDTO.Battery.Capacity;
+            phone.Battery.StandbyTime = Convert.ToInt32(phoneDetailDTO.Battery.StandbyTime);
+            phone.Battery.TalkTime = Convert.ToInt32(phoneDetailDTO.Battery.TalkTime);
+            phone.Battery.Capacity = Convert.ToInt32(phoneDetailDTO.Battery.Capacity);
             var batType = db.BatteryTypes.SingleOrDefault(b => b.Type == phoneDetailDTO.Battery.Type);
             if (batType == null)
-                phone.BatteryType = new BatteryType { Type = phoneDetailDTO.Battery.Type , BatteryTypeName = phoneDetailDTO.Battery.TypeName};
+                phone.BatteryType = new BatteryType { Type = phoneDetailDTO.Battery.Type, BatteryTypeName = phoneDetailDTO.Battery.TypeName };
             else phone.BatteryType = batType;
             //}
 
             //image{
             List<Image> imgList = phone.Images.ToList();
-            for(int i=0; i<phoneDetailDTO.Images.Count; i++)
+            for (int i = 0; i < phoneDetailDTO.Images.Count; i++)
             {
                 String s = phoneDetailDTO.Images.ElementAt(i);
                 Image img = await db.Images.SingleOrDefaultAsync(pic => pic.ImageUrl == s);
-                if (imgList.Contains(img)==false) imgList.Add(img);
+                if (imgList.Contains(img) == false) imgList.Add(img);
             }
             for (int i = 0; i < imgList.Count; i++)
             {
@@ -171,7 +188,7 @@ namespace PhoneCat.Controllers
                 Availability availability = await db.Availabilities.SingleOrDefaultAsync(av => av.Name == s);
                 if (availabilityList.Contains(availability) == false) availabilityList.Add(availability);
             }
-            for (int i=0; i<availabilityList.Count; i++)
+            for (int i = 0; i < availabilityList.Count; i++)
             {
                 if (phoneDetailDTO.Availability.IndexOf(availabilityList[i].Name) < 0)
                 {
@@ -183,16 +200,24 @@ namespace PhoneCat.Controllers
             //}
 
             //display{
-            phone.Display.ScreenSize = phoneDetailDTO.Display.ScreenSize;
+            phone.Display.ScreenSize = Convert.ToDouble(phoneDetailDTO.Display.ScreenSize, CultureInfo.InvariantCulture);
             phone.Display.TouchScreen = phoneDetailDTO.Display.TouchScreen;
-            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == phoneDetailDTO.Display.Width && b.Height == phoneDetailDTO.Display.Height);
+            var res = phoneDetailDTO.Display.Resolution.Split('x');
+            int width=0, height=0;
+            if (res.Count() == 2)
+            {
+                height = Convert.ToInt32(res[0]);
+                width = Convert.ToInt32(res[1]);
+            }
+
+            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == width && b.Height == height);
             if (dispRes == null)
-                phone.DisplayResolution = new DisplayResolution {Height = phoneDetailDTO.Display.Height, Width = phoneDetailDTO.Display.Width};
+                phone.DisplayResolution = new DisplayResolution {Height = height, Width = width};
             else phone.DisplayResolution = dispRes;
             //}
 
             //camera{
-            phone.Camera = phoneDetailDTO.Camera;
+            phone.Camera.Primary = Convert.ToDouble(phoneDetailDTO.Camera.Primary, CultureInfo.InvariantCulture);
             List<CameraFeatures> featuresList = phone.CameraFeatures.ToList();
             for (int i = 0; i < phoneDetailDTO.CameraFeatures.Count; i++)
             {
@@ -240,7 +265,7 @@ namespace PhoneCat.Controllers
 
             //hardware{
             phone.Hardware.Accelerometer = phoneDetailDTO.Hardware.Accelerometer;
-            phone.Hardware.AudioJack = phoneDetailDTO.Hardware.AudioJack;
+            phone.Hardware.AudioJack = Convert.ToDouble(phoneDetailDTO.Hardware.AudioJack, CultureInfo.InvariantCulture);
             phone.Hardware.FmRadio = phoneDetailDTO.Hardware.FmRadio;
             phone.Hardware.PhysicalKeyboard = phoneDetailDTO.Hardware.PhysicalKeyboard;
             var cpu = db.Processors.SingleOrDefault(c => c.Name == phoneDetailDTO.Hardware.Processor);
@@ -286,18 +311,35 @@ namespace PhoneCat.Controllers
             {
                 Name = phoneDetailDTO.Name,
                 Snippet = phoneDetailDTO.Snippet,
-                Age = phoneDetailDTO.Age,
+                Age = Convert.ToInt32(phoneDetailDTO.Age),
                 Description = phoneDetailDTO.Description,
-                Storage = phoneDetailDTO.Storage,
-                SizeAndWeight = phoneDetailDTO.SizeAndWeight,
-                AdditionalFeatures = phoneDetailDTO.AdditionalFeatures                
+                AdditionalFeatures = phoneDetailDTO.AdditionalFeatures
             };
+
+            //storage{
+            phone.Storage = new Storage
+            {
+                Flash = Convert.ToInt32(phoneDetailDTO.Storage.Flash),
+                Ram = Convert.ToInt32(phoneDetailDTO.Storage.Ram),
+            };
+            //}
+
+            //sizeandweight{
+            phone.SizeAndWeight = new SizeAndWeight
+            {
+                Height = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Height, CultureInfo.InvariantCulture),
+                Width = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Width, CultureInfo.InvariantCulture),
+                Depth = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Depth, CultureInfo.InvariantCulture),
+                Weight = Convert.ToDouble(phoneDetailDTO.SizeAndWeight.Weight, CultureInfo.InvariantCulture)
+            };
+            //}
+
             //battery{
             phone.Battery = new Battery
             {
-                StandbyTime = phoneDetailDTO.Battery.StandbyTime,
-                TalkTime = phoneDetailDTO.Battery.TalkTime,
-                Capacity = phoneDetailDTO.Battery.Capacity
+                StandbyTime = Convert.ToInt32(phoneDetailDTO.Battery.StandbyTime),
+                TalkTime = Convert.ToInt32(phoneDetailDTO.Battery.TalkTime),
+                Capacity = Convert.ToInt32(phoneDetailDTO.Battery.Capacity)
             };
             var batType = db.BatteryTypes.SingleOrDefault(b => b.Type == phoneDetailDTO.Battery.Type);
             if (batType == null)
@@ -338,17 +380,27 @@ namespace PhoneCat.Controllers
             //display{
             phone.Display = new Display
             {
-                ScreenSize = phoneDetailDTO.Display.ScreenSize,
+                ScreenSize = Convert.ToDouble(phoneDetailDTO.Display.ScreenSize, CultureInfo.InvariantCulture),
                 TouchScreen = phoneDetailDTO.Display.TouchScreen
             };
-            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == phoneDetailDTO.Display.Width && b.Height == phoneDetailDTO.Display.Height);
+            var res = phoneDetailDTO.Display.Resolution.Split('x');
+            int width = 0, height = 0;
+            if (res.Count() == 2)
+            {
+                height = Convert.ToInt32(res[0]);
+                width = Convert.ToInt32(res[1]);
+            }
+            var dispRes = db.DisplayResolutions.SingleOrDefault(b => b.Width == width && b.Height == height);
             if (dispRes == null)
-                phone.DisplayResolution = new DisplayResolution { Height = phoneDetailDTO.Display.Height, Width = phoneDetailDTO.Display.Width };
+                phone.DisplayResolution = new DisplayResolution { Height = height, Width = width };
             else phone.DisplayResolution = dispRes;
             //}
 
             //camera{
-            phone.Camera = phoneDetailDTO.Camera;
+            phone.Camera = new Camera
+            {
+                Primary = Convert.ToDouble(phoneDetailDTO.Camera.Primary, CultureInfo.InvariantCulture)
+            };               
             List<CameraFeatures> featuresList = new List<CameraFeatures>();
             for (int i = 0; i < phoneDetailDTO.CameraFeatures.Count; i++)
             {
@@ -385,7 +437,7 @@ namespace PhoneCat.Controllers
             phone.Hardware = new Hardware()
             {
                 Accelerometer = phoneDetailDTO.Hardware.Accelerometer,
-                AudioJack = phoneDetailDTO.Hardware.AudioJack,
+                AudioJack = Convert.ToDouble(phoneDetailDTO.Hardware.AudioJack, CultureInfo.InvariantCulture),
                 FmRadio = phoneDetailDTO.Hardware.FmRadio,
                 PhysicalKeyboard = phoneDetailDTO.Hardware.PhysicalKeyboard
             };

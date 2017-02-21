@@ -182,11 +182,14 @@
     <Compile Include="DAL\PhoneCatContext.cs" />
     <Compile Include="DTO\AndroidDTO.cs" />
     <Compile Include="DTO\BatteryDTO.cs" />
+    <Compile Include="DTO\CameraDTO.cs" />
     <Compile Include="DTO\ConnectivityDTO.cs" />
     <Compile Include="DTO\DisplayDTO.cs" />
     <Compile Include="DTO\HardwareDTO.cs" />
     <Compile Include="DTO\PhoneDetailDTO.cs" />
     <Compile Include="DTO\PhoneDTO.cs" />
+    <Compile Include="DTO\SizeAndWeightDTO.cs" />
+    <Compile Include="DTO\StorageDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -296,6 +299,8 @@
     <Compile Include="Models\Usb.cs" />
     <Compile Include="Models\Wifi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\DoubleValidator.cs" />
+    <Compile Include="Validators\IntegerValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\core\usb\usb.module.js" />

@@ -48,11 +48,6 @@ angular.
                 }
 
                 self.createChanges = function createChanges() {
-                    var resolutions = self.selectedResolution.split('x');
-                    if (resolutions.length == 2) {
-                        self.phone.display.height = resolutions[0];
-                        self.phone.display.width = resolutions[1];
-                    }
                     Phone.save(self.phone, function () {
                         $location.path('/phones')
                     },
@@ -66,9 +61,6 @@ angular.
                 }
 
                 self.saveChanges = function saveChanges() {
-                    var resolutions = self.selectedResolution.split('x');
-                    self.phone.display.height = resolutions[0];
-                    self.phone.display.width = resolutions[1];
                     Phone.update({ phoneId: self.phone.id }, self.phone, function () {
                         $location.path('/phones/' + self.phone.id)
                     },
