@@ -9,5 +9,6 @@ angular.module('core', [
     'core.displayResolution',
     'core.cameraFeatures',
     'core.processor',
-    'core.usb'
+    'core.usb',
+    'core.image'
 ]);

@@ -106,3 +106,7 @@ h1 {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+td > input[type="checkbox"]{
+    width:30px;
+}

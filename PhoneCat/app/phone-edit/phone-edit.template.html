@@ -4,7 +4,7 @@
         <ul>
             <li style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Name']">{{error}}</li>
         </ul>
-        <input class="form-control" ng-model="$ctrl.phone.name" />
+        <input required class="form-control" ng-model="$ctrl.phone.name" />
     </div>
     
 
@@ -16,7 +16,7 @@
     <ul>
         <li style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Age']">{{error}}</li>
     </ul>
-    <input class="form-control" ng-model="$ctrl.phone.age" />
+    <input required class="form-control" ng-model="$ctrl.phone.age" />
     <div class="row">
         <ul class="phone-thumbs">
             <li ng-repeat="img in $ctrl.phone.images">
@@ -27,6 +27,11 @@
             </li>
         </ul>
     </div>
+    <ul>
+        <li ng-repeat="i in $ctrl.startImages">{{i}}</li>
+    </ul>
+    
+
     <div id="errors"></div>
     <br />
     <button class="form-control-file" ngf-select="$ctrl.uploadPic($files)"
@@ -72,7 +77,8 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Battery.Type']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <select class="form-control" ng-model="$ctrl.phone.battery.type">
+                            <select required class="form-control" ng-model="$ctrl.phone.battery.type">
+                                <option selected hidden disabled value=''></option>
                                 <option value="{{item}}" ng-repeat="item in $ctrl.batteryTypes">{{item}}</option>
                             </select>
                         </td>
@@ -81,7 +87,7 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Battery.Capacity']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <input class="form-control" ng-model="$ctrl.phone.battery.capacity" />
+                            <input required class="form-control" ng-model="$ctrl.phone.battery.capacity" />
                         </td>
                         <td>mAh</td>
                     </tr>
@@ -89,7 +95,7 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Battery.TalkTime']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <input class="form-control" ng-model="$ctrl.phone.battery.talkTime" />
+                            <input required class="form-control" ng-model="$ctrl.phone.battery.talkTime" />
                         </td>
                         <td>hours</td>
                     </tr>
@@ -97,7 +103,7 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Battery.StandbyTime']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <input class="form-control" ng-model="$ctrl.phone.battery.standbyTime" />
+                            <input required class="form-control" ng-model="$ctrl.phone.battery.standbyTime" />
                         </td>
                         <td>hours</td>
                     </tr>
@@ -112,7 +118,7 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Storage.Ram']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <input class="form-control" ng-model="$ctrl.phone.storage.ram" />
+                            <input required class="form-control" ng-model="$ctrl.phone.storage.ram" />
                         </td>
                         <td>MB</td>
                     </tr>
@@ -120,7 +126,7 @@
         <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Storage.Flash']"><td>{{error}}</td></tr>
         <tr>
             <td>
-                <input class="form-control" ng-model="$ctrl.phone.storage.flash" />
+                <input required class="form-control" ng-model="$ctrl.phone.storage.flash" />
             </td>
             <td>MB</td>
         </tr>
@@ -136,7 +142,8 @@
                 <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Connectivity.Bluetooth']"><td>{{error}}</td></tr>
                 <tr>
                     <td>
-                        <select class="form-control" ng-model="$ctrl.phone.connectivity.bluetooth">
+                        <select required class="form-control" ng-model="$ctrl.phone.connectivity.bluetooth">
+                            <option selected hidden disabled value=''></option>
                             <option value="{{item}}" ng-repeat="item in $ctrl.bluetooth">{{item}}</option>
                         </select>
                     </td>
@@ -183,14 +190,16 @@
                 <dt>OS Version</dt>
                 <dd style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Android.Os']">{{error}}</dd>
                 <dd>
-                    <select class="form-control" ng-model="$ctrl.phone.android.os">
+                    <select required class="form-control" ng-model="$ctrl.phone.android.os">
+                        <option selected hidden disabled value=''></option>
                         <option value="{{item}}" ng-repeat="item in $ctrl.androidOs">{{item}}</option>
                     </select>
                 </dd>
                 <dt>UI</dt>
                 <dd style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Android.Ui']">{{error}}</dd>
                 <dd>
-                    <select class="form-control" ng-model="$ctrl.phone.android.ui">
+                    <select required class="form-control" ng-model="$ctrl.phone.android.ui">
+                        <option selected hidden disabled value=''></option>
                         <option value="{{item}}" ng-repeat="item in $ctrl.androidUi">{{item}}</option>
                     </select>
                 </dd>
@@ -204,26 +213,26 @@
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.SizeAndWeight.Height']"><td></td><td>{{error}}</td></tr>
                     <tr>
                         <td>Height:</td>
-                        <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.height" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.sizeAndWeight.height" /></td>
                         <td>mm.</td>
                     </tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.SizeAndWeight.Width']"><td></td><td>{{error}}</td></tr>
                     <tr>
                         <td>Width:</td>
-                        <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.width" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.sizeAndWeight.width" /></td>
                         <td>mm.</td>
                     </tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.SizeAndWeight.Depth']"><td></td><td>{{error}}</td></tr>
                     <tr>
                         <td>Depth:</td>
-                        <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.depth" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.sizeAndWeight.depth" /></td>
                         <td>mm.</td>
                     </tr>
                     <tr><th></th><th>Weight</th><th></th></tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.SizeAndWeight.Weight']"><td></td><td>{{error}}</td></tr>
                     <tr>
                         <td></td>
-                        <td><input class="form-control" ng-model="$ctrl.phone.sizeAndWeight.weight" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.sizeAndWeight.weight" /></td>
                         <td>g.</td>
                     </tr>
                 </tbody>
@@ -236,14 +245,15 @@
                     <tr><th>Screen size</th></tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Display.ScreenSize']"><td>{{error}}</td></tr>
                     <tr>
-                        <td><input class="form-control" ng-model="$ctrl.phone.display.screenSize" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.display.screenSize" /></td>
                         <td>inches</td>
                     </tr>
                     <tr><th>Screen resolution</th></tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Display.Resolution']"><td>{{error}}</td></tr>
                     <tr>
                         <td>
-                            <select class="form-control" ng-model="$ctrl.phone.display.resolution">
+                            <select required class="form-control" ng-model="$ctrl.phone.display.resolution">
+                                <option selected hidden disabled value=''></option>
                                 <option value="{{item}}" ng-repeat="item in $ctrl.displayResolutions">{{item}}</option>
                             </select>
                         </td>
@@ -264,7 +274,8 @@
                 <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Hardware.Processor']"><td>{{error}}</td></tr>
                 <tr>
                     <td>
-                        <select class="form-control" ng-model="$ctrl.phone.hardware.processor">
+                        <select required class="form-control" ng-model="$ctrl.phone.hardware.processor">
+                            <option selected hidden disabled value=''></option>
                             <option value="{{item}}" ng-repeat="item in $ctrl.processors">{{item}}</option>
                         </select>
                     </td>
@@ -273,7 +284,8 @@
                 <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Hardware.Usb']"><td>{{error}}</td></tr>
                 <tr>
                     <td>
-                        <select class="form-control" ng-model="$ctrl.phone.hardware.usb">
+                        <select required class="form-control" ng-model="$ctrl.phone.hardware.usb">
+                            <option selected hidden disabled value=''></option>
                             <option value="{{item}}" ng-repeat="item in $ctrl.usbs">{{item}}</option>
                         </select>
                     </td>
@@ -281,7 +293,7 @@
                 <tr><th>Audio / headphone jack</th></tr>
                 <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Hardware.AudioJack']"><td>{{error}}</td></tr>
                 <tr>
-                    <td><input class="form-control" ng-model="$ctrl.phone.hardware.audioJack" /></td>
+                    <td><input required class="form-control" ng-model="$ctrl.phone.hardware.audioJack" /></td>
                     <td>mm.</td>
                 </tr>
             </table>
@@ -303,7 +315,7 @@
                     <tr><th>Primary</th></tr>
                     <tr style="color:red;" ng-repeat="error in $ctrl.errors['modelState']['phoneDetailDTO.Camera.Primary']"><td>{{error}}</td></tr>
                     <tr>
-                        <td><input class="form-control" ng-model="$ctrl.phone.camera.primary" /></td>
+                        <td><input required class="form-control" ng-model="$ctrl.phone.camera.primary" /></td>
                         <td>megapixels</td>
                     </tr>
                     <tr><th>Features</th></tr>

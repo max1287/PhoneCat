@@ -85,5 +85,18 @@ namespace PhoneCat.Controllers
             }
         }
         
+        public HttpResponseMessage DeleteImage(string imageUrl)
+        {
+            var img = db.Images.SingleOrDefault(i => i.ImageUrl == imageUrl);
+            if (img != null)
+            {
+                db.Images.Remove(img);
+                db.SaveChanges();
+            }
+            string root = HttpContext.Current.Server.MapPath("~/Content/img/");
+            File.Delete(root + imageUrl);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
     }
 }

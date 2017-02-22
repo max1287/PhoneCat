@@ -299,6 +299,9 @@
     <Compile Include="Validators\IntegerValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\core\image\image.module.js" />
+    <Content Include="app\core\image\image.service.js" />
+    <Content Include="app\core\checkmark\checkmark.filter.js" />
     <Content Include="app\core\usb\usb.module.js" />
     <Content Include="app\core\usb\usb.service.js" />
     <Content Include="app\core\processor\processor.module.js" />

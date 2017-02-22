@@ -303,7 +303,7 @@ namespace PhoneCat.Migrations
                 new Processor {Name = "1GHz Cortex A8 (Hummingbird) processor" },
                 new Processor {Name = "2nd Generation 1GHz Qualcomm Snapdragon MSM8255" },
                 new Processor {Name = "1.2 GHz TI OMAP" },
-                new Processor {Name = "" }
+                new Processor {Name = "1 GHz" }
             };
             processors.ForEach(p => context.Processors.AddOrUpdate(s => s.Name, p));
             context.SaveChanges();

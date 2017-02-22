@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -162,6 +164,14 @@ namespace PhoneCat.Controllers
             {
                 if (phoneDetailDTO.Images.IndexOf(imgList[i].ImageUrl) < 0)
                 {
+                    string root = HttpContext.Current.Server.MapPath("~/Content/img/");
+                    File.Delete(root + imgList[i].ImageUrl);
+                    String s = imgList[i].ImageUrl;
+                    Image img = await db.Images.SingleOrDefaultAsync(pic => pic.ImageUrl == s);
+                    if (img != null)
+                    {
+                        db.Images.Remove(img);
+                    }
                     imgList.Remove(imgList[i]);
                     i--;
                 }
